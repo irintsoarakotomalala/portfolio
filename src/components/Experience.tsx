@@ -83,7 +83,7 @@ const Experience = () => {
                 {/* Content */}
                 <div
                   className={`ml-12 md:ml-0 md:w-[45%] ${
-                    isLeft ? "md:pr-12 md:text-right" : "md:pl-12"
+                    isLeft ? "md:pr-12" : "md:pl-12"
                   }`}
                 >
                   <div className="glass-card">
@@ -97,9 +97,11 @@ const Experience = () => {
                         {exp.period}
                       </span>
                     </div>
-                    <h3 className="text-lg font-bold text-highlight mb-1">
-                      {exp.company}
-                    </h3>
+                    <div className="inline-block px-3 py-1.5 mb-2 rounded-lg bg-gradient-to-r from-primary/20 to-secondary/20 border border-primary/30">
+                      <h3 className="text-lg font-bold text-white">
+                        {exp.company}
+                      </h3>
+                    </div>
                     <p className="text-sm text-foreground/80 mb-2">
                       {exp.title}
                     </p>

@@ -27,14 +27,14 @@ const About = () => {
             className="md:col-span-8 md:row-span-2 group relative"
           >
             <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent rounded-3xl blur-2xl group-hover:blur-3xl transition-all" />
-            <div className="relative h-full glass-card p-8 hover:border-primary/40 transition-all">
+            <div className="relative h-full glass-card p-6 sm:p-8 hover:border-primary/40 transition-all">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
-                  <User size={24} className="text-background" />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
+                  <User size={20} className="sm:w-6 sm:h-6 text-background" />
                 </div>
-                <h3 className="text-2xl font-bold text-highlight">Mon histoire</h3>
+                <h3 className="text-xl sm:text-2xl font-bold text-highlight">Mon histoire</h3>
               </div>
-              <div className="space-y-4 text-foreground/80 leading-relaxed text-lg">
+              <div className="space-y-4 text-foreground/80 leading-relaxed text-base sm:text-lg">
                 <p>
                   Développeur full stack passionné par le web depuis plusieurs années, je me spécialise 
                   dans la création de sites vitrines modernes et responsives. Mon expertise 

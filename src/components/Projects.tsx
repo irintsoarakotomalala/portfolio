@@ -76,7 +76,7 @@ const Projects = () => {
         </motion.div>
 
         {/* Filters */}
-        <div className="flex flex-wrap gap-2 mb-10">
+        <div className="flex flex-wrap gap-2 mb-10 justify-center md:justify-start">
           <button
             onClick={() => setFilter(null)}
             className={`px-3 py-1 rounded-full text-xs font-mono border transition-all duration-300 ${
@@ -103,7 +103,7 @@ const Projects = () => {
         </div>
 
         {/* Project grid */}
-        <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <motion.div layout className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           <AnimatePresence mode="popLayout">
             {filtered.map((project) => (
               <motion.div

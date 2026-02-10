@@ -163,7 +163,7 @@ const Hero = () => {
                 {/* Main image container with unique shape */}
                 <div className="relative w-full h-full rounded-[3rem] overflow-hidden border-4 border-primary/30 bg-gradient-to-br from-primary/5 to-secondary/5 backdrop-blur-sm">
                   <img
-                    src="/ChatGPT Image 9 févr. 2026, 16_12_29.png"
+                    src="/portrait.png"
                     alt="RAKOTOMALALA Irintsoa"
                     className="w-full h-full object-cover"
                     style={{ objectPosition: '50% 20%' }}

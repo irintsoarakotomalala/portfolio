@@ -15,6 +15,12 @@ const Contact = () => {
       return;
     }
     
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(form.email)) {
+      toast.error("Veuillez entrer une adresse email valide.");
+      return;
+    }
+    
     setSending(true);
     
     try {
@@ -66,7 +72,7 @@ const Contact = () => {
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6 }}
             onSubmit={handleSubmit}
-            className="space-y-5"
+            className="space-y-4 sm:space-y-5"
           >
             <div>
               <label htmlFor="name" className="text-sm font-mono text-foreground block mb-1">
@@ -78,7 +84,7 @@ const Contact = () => {
                 maxLength={100}
                 value={form.name}
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
-                className="w-full bg-muted border border-border rounded px-4 py-3 text-sm text-highlight focus:border-primary focus:outline-none transition-colors"
+                className="w-full bg-muted border border-border rounded px-3 py-2 sm:px-4 sm:py-3 text-sm text-highlight focus:border-primary focus:outline-none transition-colors"
                 placeholder="Votre nom"
               />
             </div>
@@ -92,7 +98,7 @@ const Contact = () => {
                 maxLength={255}
                 value={form.email}
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
-                className="w-full bg-muted border border-border rounded px-4 py-3 text-sm text-highlight focus:border-primary focus:outline-none transition-colors"
+                className="w-full bg-muted border border-border rounded px-3 py-2 sm:px-4 sm:py-3 text-sm text-highlight focus:border-primary focus:outline-none transition-colors"
                 placeholder="votre@email.com"
               />
             </div>
@@ -106,14 +112,14 @@ const Contact = () => {
                 maxLength={1000}
                 value={form.message}
                 onChange={(e) => setForm({ ...form, message: e.target.value })}
-                className="w-full bg-muted border border-border rounded px-4 py-3 text-sm text-highlight focus:border-primary focus:outline-none transition-colors resize-none"
+                className="w-full bg-muted border border-border rounded px-3 py-2 sm:px-4 sm:py-3 text-sm text-highlight focus:border-primary focus:outline-none transition-colors resize-none"
                 placeholder="Décrivez votre projet..."
               />
             </div>
             <button
               type="submit"
               disabled={sending}
-              className="cta-button-filled flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="cta-button-filled w-full sm:w-auto flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <Send size={16} />
               {sending ? "Envoi en cours..." : "Envoyer"}
