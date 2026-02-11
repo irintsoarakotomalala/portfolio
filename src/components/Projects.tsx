@@ -4,52 +4,61 @@ import { ExternalLink, Github, Folder } from "lucide-react";
 
 const allProjects = [
   {
-    title: "Site Corporate Vanilla Pay",
+    title: "Site Vitrine Vanilla Pay",
     description:
-      "Rebranding complet de la société incluant la refonte du logo, charte graphique et développement du site web vitrine moderne et responsive.",
-    tags: ["React", "Design", "Branding"],
+      "Rebranding complet de la société incluant la refonte du logo, charte graphique et développement du site web vitrine moderne et responsive avec animations élégantes.",
+    tags: ["HTML", "CSS", "Design", "Branding"],
+    image: "/projects/vanilla-pay-site.jpg",
     github: "https://github.com",
-    live: "https://example.com",
+    live: "https://vanillapay.mg",
     featured: true,
   },
   {
-    title: "Application Web E-Commerce",
+    title: "Plateforme MADAVISION",
     description:
-      "Plateforme e-commerce complète avec gestion de produits, panier d'achat et système de paiement intégré. Architecture microservices.",
-    tags: ["Node.js", "React", "PostgreSQL"],
+      "Site front office complet pour l'inscription et réservation de stands d'exposition avec système de facturation proforma automatisé et interface intuitive.",
+    tags: ["React", "Node.js", "PostgreSQL", "PDF"],
+    image: "/projects/madavision-platform.jpg",
     github: "https://github.com",
-    live: "https://example.com",
+    live: "https://madavision.mg",
     featured: true,
   },
   {
-    title: "API REST Springboot",
+    title: "Plateforme ONTM (ITM & IHM)",
     description:
-      "Développement d'une API REST robuste avec Java Springboot pour la gestion de données client. Intégration avec PostgreSQL et sécurisation JWT.",
-    tags: ["Java", "Springboot", "PostgreSQL"],
+      "Solution digitale pour l'Office National du Tourisme avec plan interactif des stands, réservation en temps réel et génération automatique de factures proforma.",
+    tags: ["React", "Interactive Maps", "Node.js", "API"],
+    image: "/projects/ontm-platform.jpg",
     github: "https://github.com",
-    live: "https://example.com",
+    live: "https://ontm-salon.mg",
     featured: true,
   },
   {
-    title: "Portfolio Designer",
-    description: "Site portfolio moderne pour présenter des projets de design avec animations fluides et interface intuitive.",
-    tags: ["React", "Figma", "Design"],
+    title: "Site Vitrine Madagasc'art",
+    description: "Plateforme élégante présentant les marques et produits artisanaux malgaches, spécialisée dans les sacs en raphia avec galerie interactive et catalogue produits.",
+    tags: ["Next.js", "E-commerce", "Design", "Galerie"],
+    image: "/projects/madagascart-site.jpg",
     github: "https://github.com",
-    featured: false,
+    live: "https://madagascart.mg",
+    featured: true,
   },
   {
-    title: "Dashboard Analytics",
-    description: "Tableau de bord analytique temps réel avec graphiques interactifs et visualisations de données.",
-    tags: ["React", "Node.js", "Express.js"],
+    title: "App Mobile Vanilla Pay",
+    description: "Application mobile innovante facilitant les paiements en ligne pour les touristes étrangers, conversion automatique Euro vers Ariary avec interface moderne.",
+    tags: ["React Native", "Fintech", "API Payment", "Mobile"],
+    image: "/projects/vanilla-pay-app.jpg",
     github: "https://github.com",
-    featured: false,
+    live: "https://app.vanillapay.mg",
+    featured: true,
   },
   {
-    title: "Application Mobile",
-    description: "Application mobile cross-platform pour la gestion de tâches avec synchronisation cloud.",
-    tags: ["React", "Node.js", "API REST"],
+    title: "App B2B Networking Salons",
+    description: "Plateforme collaborative permettant aux exposants de se connecter lors des salons avec système de rendez-vous temps réel, notifications push et messagerie intégrée.",
+    tags: ["React", "Node.js", "WebSocket", "B2B"],
+    image: "/projects/b2b-networking.jpg",
     github: "https://github.com",
-    featured: false,
+    live: "https://networking-salon.mg",
+    featured: true,
   },
 ];
 
@@ -113,11 +122,26 @@ const Projects = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.3 }}
-                className="project-card flex flex-col"
+                className="project-card flex flex-col overflow-hidden"
               >
+                {/* Project Image */}
+                <div className="relative h-48 bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
+                  <div className="text-center">
+                    <Folder size={48} className="text-primary/60 mx-auto mb-2" />
+                    <p className="text-xs text-muted-foreground font-mono">Image à venir</p>
+                  </div>
+                  {project.featured && (
+                    <div className="absolute top-3 right-3 px-2 py-1 bg-primary/20 backdrop-blur-sm rounded-full">
+                      <span className="text-xs font-mono text-primary">Featured</span>
+                    </div>
+                  )}
+                </div>
+                
                 <div className="p-6 flex flex-col flex-1">
                   <div className="flex items-center justify-between mb-4">
-                    <Folder size={36} className="text-primary" />
+                    <h3 className="text-lg font-semibold text-highlight">
+                      {project.title}
+                    </h3>
                     <div className="flex gap-3">
                       {project.github && (
                         <a
@@ -143,9 +167,6 @@ const Projects = () => {
                       )}
                     </div>
                   </div>
-                  <h3 className="text-lg font-semibold text-highlight mb-2">
-                    {project.title}
-                  </h3>
                   <p className="text-sm text-foreground leading-relaxed flex-1 mb-4">
                     {project.description}
                   </p>
@@ -153,7 +174,7 @@ const Projects = () => {
                     {project.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="text-xs font-mono text-primary/80"
+                        className="text-xs font-mono text-primary/80 px-2 py-1 bg-primary/10 rounded"
                       >
                         {tag}
                       </span>
