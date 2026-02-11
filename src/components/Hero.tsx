@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Github, Linkedin, Twitter, ChevronDown, Code2, Sparkles } from "lucide-react";
+import portraitImg from "/portrait.png";
 
 const roles = [
   "Développeur Full-Stack",
@@ -163,7 +164,7 @@ const Hero = () => {
                 {/* Main image container with unique shape */}
                 <div className="relative w-full h-full rounded-[3rem] overflow-hidden border-4 border-primary/30 bg-gradient-to-br from-primary/5 to-secondary/5 backdrop-blur-sm">
                   <img
-                    src="/portrait.png"
+                    src={portraitImg}
                     alt="RAKOTOMALALA Irintsoa"
                     className="w-full h-full object-cover"
                     style={{ objectPosition: '50% 20%' }}

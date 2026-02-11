@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import pdpImg from "/pdp.jpeg";
 
 const navItems = [
   { label: "Accueil", href: "#hero" },
@@ -33,7 +34,7 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
         <a href="#hero" className="group flex items-center gap-2">
           <div className="w-12 h-12 rounded-xl overflow-hidden">
-            <img src="/pdp.jpeg" alt="Irintsoa" className="w-full h-full object-cover scale-[2.05] translate-y-6 transition-transform group-hover:scale-[2.3]" />
+            <img src={pdpImg} alt="Irintsoa" className="w-full h-full object-cover scale-[2.05] translate-y-6 transition-transform group-hover:scale-[2.3]" />
           </div>
           <span className="font-bold text-lg text-highlight hidden sm:block">Irintsoa</span>
         </a>
