@@ -4,7 +4,7 @@ import { ExternalLink, Github, Folder } from "lucide-react";
 
 const allProjects = [
   {
-    title: "Site Vitrine Vanilla Pay",
+    title: "Site vitrine pour Vanilla Pay International",
     description:
       "Rebranding complet de la société incluant la refonte du logo, charte graphique et développement du site web vitrine moderne et responsive avec animations élégantes.",
     tags: ["HTML", "CSS", "Design", "Branding"],
@@ -14,7 +14,7 @@ const allProjects = [
     featured: true,
   },
   {
-    title: "Plateforme MADAVISION",
+    title: "Plateforme de réservation pour MADAVISION",
     description:
       "Site front office complet pour l'inscription et réservation de stands d'exposition avec système de facturation proforma automatisé et interface intuitive.",
     tags: ["React", "Node.js", "PostgreSQL", "PDF"],
@@ -24,7 +24,7 @@ const allProjects = [
     featured: true,
   },
   {
-    title: "Plateforme ONTM (ITM & IHM)",
+    title: "Solution digitale pour ONTM (ITM & IHM)",
     description:
       "Solution digitale pour l'Office National du Tourisme avec plan interactif des stands, réservation en temps réel et génération automatique de factures proforma.",
     tags: ["React", "Interactive Maps", "Node.js", "API"],
@@ -34,7 +34,7 @@ const allProjects = [
     featured: true,
   },
   {
-    title: "Site Vitrine Madagasc'art",
+    title: "Site vitrine pour Madagasc'art",
     description: "Plateforme élégante présentant les marques et produits artisanaux malgaches, spécialisée dans les sacs en raphia avec galerie interactive et catalogue produits.",
     tags: ["Next.js", "E-commerce", "Design", "Galerie"],
     image: "/projects/madagascart-site.jpg",
@@ -43,7 +43,7 @@ const allProjects = [
     featured: true,
   },
   {
-    title: "App Mobile Vanilla Pay",
+    title: "Application mobile pour Vanilla Pay",
     description: "Application mobile innovante facilitant les paiements en ligne pour les touristes étrangers, conversion automatique Euro vers Ariary avec interface moderne.",
     tags: ["React Native", "Fintech", "API Payment", "Mobile"],
     image: "/projects/vanilla-pay-app.jpg",
@@ -52,7 +52,7 @@ const allProjects = [
     featured: true,
   },
   {
-    title: "App B2B Networking Salons",
+    title: "Application B2B pour networking salons",
     description: "Plateforme collaborative permettant aux exposants de se connecter lors des salons avec système de rendez-vous temps réel, notifications push et messagerie intégrée.",
     tags: ["React", "Node.js", "WebSocket", "B2B"],
     image: "/projects/b2b-networking.jpg",
