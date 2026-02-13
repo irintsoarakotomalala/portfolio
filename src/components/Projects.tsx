@@ -1,6 +1,38 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ExternalLink, Github, Folder } from "lucide-react";
+import { ExternalLink, Github, Folder, X, ChevronLeft, ChevronRight } from "lucide-react";
+
+// VPI Images
+import vpi1 from "../assets/VPI site vitrine/1.png";
+import vpi2 from "../assets/VPI site vitrine/2.png";
+import vpi3 from "../assets/VPI site vitrine/3.png";
+import vpi4 from "../assets/VPI site vitrine/4.png";
+
+// MADAVISION Images
+import mada1 from "../assets/MADAVISION/1.png";
+import mada2 from "../assets/MADAVISION/2.png";
+import mada3 from "../assets/MADAVISION/3.png";
+import mada4 from "../assets/MADAVISION/4.png";
+import mada5 from "../assets/MADAVISION/5.png";
+import mada6 from "../assets/MADAVISION/6.png";
+import mada7 from "../assets/MADAVISION/7.png";
+import mada8 from "../assets/MADAVISION/8.png";
+import mada9 from "../assets/MADAVISION/9.png";
+
+// ITM Images
+import itm1 from "../assets/ITM/1.png";
+import itm2 from "../assets/ITM/2.png";
+import itm3 from "../assets/ITM/3.png";
+import itm4 from "../assets/ITM/4.png";
+import itm5 from "../assets/ITM/5.png";
+import itm6 from "../assets/ITM/6.png";
+import itm7 from "../assets/ITM/7.png";
+import itm8 from "../assets/ITM/8.png";
+import itm9 from "../assets/ITM/9.png";
+
+// Madagascart Images
+import madagascart1 from "../assets/madagascart/1.png";
+import madagascart2 from "../assets/madagascart/2.png";
 
 const allProjects = [
   {
@@ -8,7 +40,8 @@ const allProjects = [
     description:
       "Rebranding complet de la société incluant la refonte du logo, charte graphique et développement du site web vitrine moderne et responsive avec animations élégantes.",
     tags: ["HTML", "CSS", "Design", "Branding"],
-    image: "/projects/vanilla-pay-site.jpg",
+    image: vpi1,
+    images: [vpi1, vpi2, vpi3, vpi4],
     github: "https://github.com",
     live: "https://vanillapay.mg",
     featured: true,
@@ -18,7 +51,8 @@ const allProjects = [
     description:
       "Site front office complet pour l'inscription et réservation de stands d'exposition avec système de facturation proforma automatisé et interface intuitive.",
     tags: ["React", "Node.js", "PostgreSQL", "PDF"],
-    image: "/projects/madavision-platform.jpg",
+    image: mada1,
+    images: [mada1, mada2, mada3, mada4, mada5, mada6, mada7, mada8, mada9],
     github: "https://github.com",
     live: "https://madavision.mg",
     featured: true,
@@ -28,7 +62,8 @@ const allProjects = [
     description:
       "Solution digitale pour l'Office National du Tourisme avec plan interactif des stands, réservation en temps réel et génération automatique de factures proforma.",
     tags: ["React", "Interactive Maps", "Node.js", "API"],
-    image: "/projects/ontm-platform.jpg",
+    image: itm1,
+    images: [itm1, itm2, itm3, itm4, itm5, itm6, itm7, itm8, itm9],
     github: "https://github.com",
     live: "https://ontm-salon.mg",
     featured: true,
@@ -37,7 +72,8 @@ const allProjects = [
     title: "Site vitrine pour Madagasc'art",
     description: "Plateforme élégante présentant les marques et produits artisanaux malgaches, spécialisée dans les sacs en raphia avec galerie interactive et catalogue produits.",
     tags: ["Next.js", "E-commerce", "Design", "Galerie"],
-    image: "/projects/madagascart-site.jpg",
+    image: madagascart1,
+    images: [madagascart1, madagascart2],
     github: "https://github.com",
     live: "https://madagascart.mg",
     featured: true,
@@ -66,6 +102,8 @@ const allTags = Array.from(new Set(allProjects.flatMap((p) => p.tags)));
 
 const Projects = () => {
   const [filter, setFilter] = useState<string | null>(null);
+  const [selectedProject, setSelectedProject] = useState<typeof allProjects[0] | null>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const filtered = filter
     ? allProjects.filter((p) => p.tags.includes(filter))
@@ -125,11 +163,37 @@ const Projects = () => {
                 className="project-card flex flex-col overflow-hidden"
               >
                 {/* Project Image */}
-                <div className="relative h-48 bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
-                  <div className="text-center">
-                    <Folder size={48} className="text-primary/60 mx-auto mb-2" />
-                    <p className="text-xs text-muted-foreground font-mono">Image à venir</p>
-                  </div>
+                <div 
+                  className="relative h-48 bg-gradient-to-br from-primary/20 to-secondary/20 overflow-hidden cursor-pointer group"
+                  onClick={() => {
+                    console.log('Image clicked:', project.title, 'Has images:', !!project.images);
+                    if (project.images && project.images.length > 0) {
+                      setSelectedProject(project);
+                      setCurrentImageIndex(0);
+                    }
+                  }}
+                >
+                  {project.image ? (
+                    <>
+                      <img 
+                        src={project.image} 
+                        alt={project.title}
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                      />
+                      {project.images && project.images.length > 1 && (
+                        <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                          <p className="text-white font-mono text-sm">Voir {project.images.length} images</p>
+                        </div>
+                      )}
+                    </>
+                  ) : (
+                    <div className="flex items-center justify-center h-full">
+                      <div className="text-center">
+                        <Folder size={48} className="text-primary/60 mx-auto mb-2" />
+                        <p className="text-xs text-muted-foreground font-mono">Image à venir</p>
+                      </div>
+                    </div>
+                  )}
                   {project.featured && (
                     <div className="absolute top-3 right-3 px-2 py-1 bg-primary/20 backdrop-blur-sm rounded-full">
                       <span className="text-xs font-mono text-primary">Featured</span>
@@ -185,6 +249,74 @@ const Projects = () => {
             ))}
           </AnimatePresence>
         </motion.div>
+
+        {/* Image Gallery Modal */}
+        <AnimatePresence>
+          {selectedProject && selectedProject.images && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
+              onClick={() => setSelectedProject(null)}
+            >
+              <button
+                onClick={() => setSelectedProject(null)}
+                className="absolute top-4 right-4 text-white hover:text-primary transition-colors z-10"
+              >
+                <X size={32} />
+              </button>
+
+              <div className="relative max-w-5xl w-full" onClick={(e) => e.stopPropagation()}>
+                <motion.img
+                  key={currentImageIndex}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.3 }}
+                  src={selectedProject.images[currentImageIndex]}
+                  alt={`${selectedProject.title} - Image ${currentImageIndex + 1}`}
+                  className="w-full h-auto max-h-[80vh] object-contain rounded-lg"
+                />
+
+                {selectedProject.images.length > 1 && (
+                  <>
+                    <button
+                      onClick={() => setCurrentImageIndex((prev) => (prev - 1 + selectedProject.images!.length) % selectedProject.images!.length)}
+                      className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-colors"
+                    >
+                      <ChevronLeft size={24} />
+                    </button>
+                    <button
+                      onClick={() => setCurrentImageIndex((prev) => (prev + 1) % selectedProject.images!.length)}
+                      className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-colors"
+                    >
+                      <ChevronRight size={24} />
+                    </button>
+
+                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                      {selectedProject.images.map((_, idx) => (
+                        <button
+                          key={idx}
+                          onClick={() => setCurrentImageIndex(idx)}
+                          className={`w-2 h-2 rounded-full transition-all ${
+                            idx === currentImageIndex ? "bg-primary w-8" : "bg-white/50"
+                          }`}
+                        />
+                      ))}
+                    </div>
+                  </>
+                )}
+
+                <div className="mt-4 text-center">
+                  <h3 className="text-white text-xl font-semibold mb-2">{selectedProject.title}</h3>
+                  <p className="text-white/70 text-sm">
+                    Image {currentImageIndex + 1} / {selectedProject.images.length}
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </section>
   );
