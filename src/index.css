@@ -214,6 +214,8 @@
 .typing-cursor {
   animation: blink 1s step-end infinite;
   color: hsl(var(--primary));
+  display: inline-block;
+  vertical-align: middle;
 }
 
 /* Slow spin animation for decorative rings */

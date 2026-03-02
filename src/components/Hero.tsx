@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Github, Linkedin, Twitter, ChevronDown, Code2, Sparkles } from "lucide-react";
-import portraitImg from "/portrait.png";
+import MacOSCard from "./MacOSCard";
 
 const roles = [
   "Développeur Full-Stack",
@@ -45,10 +45,10 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-8"
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 mb-5"
             >
-              <Sparkles size={16} className="text-primary" />
-              <span className="text-sm font-mono text-primary">Disponible pour des projets</span>
+              <Sparkles size={13} className="text-primary" />
+              <span className="text-xs font-mono text-primary">Disponible pour des projets</span>
             </motion.div>
 
             {/* Name with gradient */}
@@ -56,7 +56,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 leading-tight"
+              className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 leading-tight"
             >
               <span className="bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient">
                 RAKOTOMALALA
@@ -70,7 +70,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="h-20 mb-8"
+              className="h-12 mb-5"
             >
               <AnimatePresence mode="wait">
                 <motion.p
@@ -79,7 +79,7 @@ const Hero = () => {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ duration: 0.5 }}
-                  className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-foreground/80"
+                  className="text-lg sm:text-xl lg:text-2xl font-semibold text-foreground/80"
                 >
                   {roles[roleIndex]}
                 </motion.p>
@@ -91,7 +91,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
-              className="text-lg text-foreground/70 max-w-2xl mb-10 leading-relaxed"
+              className="text-sm text-foreground/70 max-w-md mb-7 leading-relaxed"
             >
               Développeur dynamique et créatif spécialisé en Design & Communication Digitale.
               Je transforme vos idées en expériences web exceptionnelles.
@@ -102,21 +102,21 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 }}
-              className="flex flex-wrap gap-4 justify-center lg:justify-start mb-12"
+              className="flex flex-wrap gap-3 justify-center lg:justify-start mb-8"
             >
               <a
                 href="#projects"
-                className="group relative px-8 py-4 bg-gradient-to-r from-primary to-secondary rounded-full font-semibold text-background overflow-hidden transition-all hover:scale-105 hover:shadow-2xl hover:shadow-primary/50"
+                className="group relative px-6 py-2.5 bg-gradient-to-r from-primary to-secondary rounded-full font-semibold text-sm text-background overflow-hidden transition-all hover:scale-105 hover:shadow-2xl hover:shadow-primary/50"
               >
                 <span className="relative z-10 flex items-center gap-2">
-                  <Code2 size={20} />
+                  <Code2 size={16} />
                   Voir mes projets
                 </span>
                 <div className="absolute inset-0 bg-gradient-to-r from-secondary to-primary opacity-0 group-hover:opacity-100 transition-opacity" />
               </a>
               <a
                 href="#contact"
-                className="px-8 py-4 border-2 border-primary/30 rounded-full font-semibold text-primary hover:bg-primary/10 transition-all hover:border-primary"
+                className="px-6 py-2.5 border-2 border-primary/30 rounded-full font-semibold text-sm text-primary hover:bg-primary/10 transition-all hover:border-primary"
               >
                 Me contacter
               </a>
@@ -127,7 +127,7 @@ const Hero = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.7 }}
-              className="flex gap-4 justify-center lg:justify-start"
+              className="flex gap-3 justify-center lg:justify-start"
             >
               {[
                 { icon: Github, href: "https://github.com", label: "GitHub" },
@@ -140,57 +140,18 @@ const Hero = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="w-12 h-12 rounded-full border border-primary/30 flex items-center justify-center text-primary hover:bg-primary hover:text-background transition-all hover:scale-110"
+                  className="w-9 h-9 rounded-full border border-primary/30 flex items-center justify-center text-primary hover:bg-primary hover:text-background transition-all hover:scale-110"
                 >
-                  <Icon size={20} />
+                  <Icon size={16} />
                 </a>
               ))}
             </motion.div>
           </motion.div>
 
-          {/* Right: Profile Image with unique design */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.4, duration: 0.8 }}
-            className="flex-1 flex justify-center lg:justify-end"
-          >
-            <div className="relative">
-              {/* Hexagon shape container */}
-              <div className="relative w-80 h-80 lg:w-96 lg:h-96">
-                {/* Rotating border */}
-                <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-primary via-secondary to-primary opacity-20 blur-2xl animate-spin-slow" />
-                
-                {/* Main image container with unique shape */}
-                <div className="relative w-full h-full rounded-[3rem] overflow-hidden border-4 border-primary/30 bg-gradient-to-br from-primary/5 to-secondary/5 backdrop-blur-sm">
-                  <img
-                    src={portraitImg}
-                    alt="RAKOTOMALALA Irintsoa"
-                    className="w-full h-full object-cover"
-                    style={{ objectPosition: '50% 20%' }}
-                  />
-                  
-                  {/* Overlay gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
-                  
-                  {/* Floating badge */}
-                  <div className="absolute bottom-6 left-6 right-6 bg-background/90 backdrop-blur-md rounded-2xl p-4 border border-primary/20">
-                    <div className="flex items-center gap-3">
-                      <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse" />
-                      <div>
-                        <p className="text-sm font-semibold text-highlight">Disponible</p>
-                        <p className="text-xs text-foreground/60">Pour vos projets</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Decorative elements */}
-                <div className="absolute -top-4 -right-4 w-24 h-24 border-4 border-primary/20 rounded-3xl rotate-12" />
-                <div className="absolute -bottom-4 -left-4 w-32 h-32 border-4 border-secondary/20 rounded-3xl -rotate-12" />
-              </div>
-            </div>
-          </motion.div>
+          {/* Right: macOS Business Card */}
+          <div className="flex-1 flex justify-center lg:justify-end">
+            <MacOSCard />
+          </div>
         </div>
       </div>
 
