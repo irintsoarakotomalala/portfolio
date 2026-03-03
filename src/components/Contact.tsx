@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Send, Mail, MapPin, Github, Linkedin, Twitter } from "lucide-react";
+import { Send, Mail, MapPin, Github, Linkedin } from "lucide-react";
 import { toast } from "sonner";
 import emailjs from '@emailjs/browser';
 
@@ -156,9 +156,8 @@ const Contact = () => {
 
             <div className="flex gap-4 pt-4">
               {[
-                { icon: Github, href: "https://github.com", label: "GitHub" },
-                { icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" },
-                { icon: Twitter, href: "https://twitter.com", label: "Twitter" },
+                { icon: Github, href: "https://github.com/irintsoarakotomalala", label: "GitHub" },
+                { icon: Linkedin, href: "https://www.linkedin.com/in/irintsoa-rakotomalala", label: "LinkedIn" },
               ].map(({ icon: Icon, href, label }) => (
                 <a
                   key={label}

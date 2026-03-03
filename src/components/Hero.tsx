@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Github, Linkedin, Twitter, ChevronDown, Code2, Sparkles } from "lucide-react";
+import { Github, Linkedin, ChevronDown, Code2, Sparkles } from "lucide-react";
 import MacOSCard from "./MacOSCard";
 
 const roles = [
@@ -130,9 +130,8 @@ const Hero = () => {
               className="flex gap-3 justify-center lg:justify-start"
             >
               {[
-                { icon: Github, href: "https://github.com", label: "GitHub" },
-                { icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" },
-                { icon: Twitter, href: "https://twitter.com", label: "Twitter" },
+                { icon: Github, href: "https://github.com/irintsoarakotomalala", label: "GitHub" },
+                { icon: Linkedin, href: "https://www.linkedin.com/in/irintsoa-rakotomalala", label: "LinkedIn" },
               ].map(({ icon: Icon, href, label }) => (
                 <a
                   key={label}
