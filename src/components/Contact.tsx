@@ -135,8 +135,8 @@ const Contact = () => {
             className="space-y-8 flex flex-col justify-center"
           >
             <div className="flex items-center gap-4">
-              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                <Mail size={18} className="text-primary" />
+              <div className="w-10 h-10 rounded-lg bg-white/8 flex items-center justify-center">
+                <Mail size={18} className="text-white/60" />
               </div>
               <div>
                 <p className="text-xs font-mono text-muted-foreground">Email</p>
@@ -145,8 +145,8 @@ const Contact = () => {
             </div>
 
             <div className="flex items-center gap-4">
-              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                <MapPin size={18} className="text-primary" />
+              <div className="w-10 h-10 rounded-lg bg-white/8 flex items-center justify-center">
+                <MapPin size={18} className="text-white/60" />
               </div>
               <div>
                 <p className="text-xs font-mono text-muted-foreground">Localisation</p>
@@ -165,7 +165,7 @@ const Contact = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary hover:bg-primary/20 transition-colors"
+                  className="w-10 h-10 rounded-lg bg-white/8 flex items-center justify-center text-white/60 hover:bg-white/15 hover:text-white transition-colors"
                 >
                   <Icon size={18} />
                 </a>

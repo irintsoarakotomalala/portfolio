@@ -33,6 +33,7 @@ import itm9 from "../assets/ITM/9.png";
 import madagascartBg from "../assets/madagascart/bg.png";
 import madagascart1 from "../assets/madagascart/1.png";
 import madagascart2 from "../assets/madagascart/2.png";
+import madagascart3 from "../assets/madagascart/3.png";
 // VPI app mobile
 import vpiAppBg from "../assets/VPI app/bg.png";
 import vpiApp1 from "../assets/VPI app/1.png";
@@ -50,14 +51,14 @@ import b2b4 from "../assets/B2B/4.png";
 import b2b5 from "../assets/B2B/5.png";
 import b2b6 from "../assets/B2B/6.png";
 import b2b7 from "../assets/B2B/7.png";
-const COLOR = "#5EEAC4";
-const DISC_R = 100;
+const COLOR = "#FFFFFF";
+const DISC_R = 110;
 const DISC_SIZE = DISC_R * 2 + 120;
 const allProjects = [
   { title: "Vanilla Pay International", shortTitle: "VPI", description: "Rebranding complet de la societe incluant la refonte du logo, charte graphique et developpement du site web vitrine moderne et responsive.", tags: ["HTML", "CSS", "Design", "Branding"], image: vpiBg, images: [vpi1, vpi2, vpi3, vpi4], github: null, live: "https://vanilla-pay.net", liveLabel: "Voir le site", year: "2025" },
   { title: "MADAVISION", shortTitle: "MDV", description: "Site front office complet pour l'inscription et reservation de stands d'exposition avec systeme de facturation proforma automatise.", tags: ["React", "Node.js", "PostgreSQL", "PDF"], image: madaBg, images: [mada1, mada2, mada3, mada4, mada5, mada6, mada7, mada8, mada9], github: null, live: "https://mada-vision.com", liveLabel: "Voir le site", year: "2025" },
   { title: "ONTM - ITM & IHM", shortTitle: "ONTM", description: "Solution digitale pour l'Office National du Tourisme avec plan interactif des stands et reservation en temps reel.", tags: ["React", "Maps", "Node.js", "API"], image: itmBg, images: [itm1, itm2, itm3, itm4, itm5, itm6, itm7, itm8, itm9], github: null, live: "https://inscription.itm-madagascar-tourisme.com", liveLabel: "Voir le site", year: "2026" },
-  { title: "Madagasc'art", shortTitle: "M/ART", description: "Plateforme elegante presentant les marques et produits artisanaux malgaches, specialisee dans les sacs en raphia.", tags: ["Next.js", "E-commerce", "Design"], image: madagascartBg, images: [madagascart1, madagascart2], github: null, live: "https://madagascart.vercel.app", liveLabel: "Voir le site", year: "2024" },
+  { title: "Madagasc'art", shortTitle: "M/ART", description: "Plateforme elegante presentant les marques et produits artisanaux malgaches, specialisee dans les sacs en raphia.", tags: ["Next.js", "E-commerce", "Design"], image: madagascartBg, images: [madagascart1, madagascart2 ,madagascart3], github: null, live: "https://madagascart.vercel.app", liveLabel: "Voir le site", year: "2024" },
   { title: "Vanilla Pay Mobile", shortTitle: "VPM", description: "Application mobile innovante facilitant les paiements pour les touristes etrangers avec conversion automatique de devises.", tags: ["React Native", "Fintech", "Mobile"], image: vpiAppBg, images: [vpiApp1, vpiApp2, vpiApp3, vpiApp4, vpiApp5, vpiApp6], github: null, live: null, liveLabel: null, year: "2024" },
   { title: "B2B Networking Salons", shortTitle: "B2B", description: "Plateforme collaborative pour les exposants avec systeme de rendez-vous temps reel et messagerie integree.", tags: ["React", "WebSocket", "B2B"], image: b2bBg, images: [b2b1, b2b2, b2b3, b2b4, b2b5, b2b6, b2b7], github: null, live: null, liveLabel: null, year: "2024" },
 ];
@@ -73,6 +74,7 @@ const Projects = () => {
   const isPanning = useRef(false);
   const panStart = useRef({ x: 0, y: 0 });
   const touchStartX = useRef<number>(0);
+  const cardRef = useRef<HTMLDivElement>(null);
   const closeGallery = () => { setGalleryProject(null); setZoom(1); setPanOffset({ x: 0, y: 0 }); };
   const changeGalleryIndex = (idx: number) => { setGalleryIndex(idx); setZoom(1); setPanOffset({ x: 0, y: 0 }); };
 
@@ -130,9 +132,42 @@ const Projects = () => {
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
   }, [activeIndex, galleryProject, galleryIndex]); // eslint-disable-line
+
+  // Gestion hover précise via window mousemove
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const card = cardRef.current;
+      if (!card) return;
+      const rect = card.getBoundingClientRect();
+      const mx = e.clientX;
+      const my = e.clientY;
+
+      // Est-ce que le curseur est dans le rectangle de la carte ?
+      const inCard = mx >= rect.left && mx <= rect.right && my >= rect.top && my <= rect.bottom;
+
+      if (!inCard) {
+        setHovered(false);
+        return;
+      }
+
+      // Est-ce dans la zone du disque (cercle centré en bas au milieu) ?
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.bottom;
+      const dx = mx - cx;
+      const dy = my - cy;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      const inDisc = dist < DISC_SIZE / 2;
+
+      setHovered(!inDisc);
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
+
   const project = allProjects[activeIndex];
   return (
-    <section id="projects" className="section-padding overflow-visible" style={{ paddingBottom: `calc(5rem + ${DISC_SIZE / 2}px)` }}>
+    <section id="projects" className="section-padding overflow-visible" style={{ paddingBottom: `calc(1rem + ${DISC_SIZE / 2}px)` }}>
       <div className="max-w-7xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="mb-10">
           <p className="section-subtitle">03. Projets</p>
@@ -157,19 +192,18 @@ const Projects = () => {
             ))}
           </div>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 justify-center">
           {/* Bouton précédent avec numéro du projet précédent */}
           <button onClick={prev} className="flex-shrink-0 flex flex-col items-center gap-1 group">
-            <div className="w-11 h-11 rounded-full border border-primary/40 bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-background transition-all group-hover:scale-110 shadow-[0_0_12px_#5EEAC420]">
+            <div className="w-11 h-11 rounded-full border border-white/20 bg-white/5 flex items-center justify-center text-white/60 group-hover:bg-white group-hover:text-black transition-all group-hover:scale-110">
               <ChevronLeft size={20} />
             </div>
-            <span className="text-[10px] font-mono text-white/30 group-hover:text-primary/60 transition-colors">{String(((activeIndex - 1 + N) % N) + 1).padStart(2, "0")}</span>
+            <span className="text-[10px] font-mono text-white/30 group-hover:text-white/60 transition-colors">{String(((activeIndex - 1 + N) % N) + 1).padStart(2, "0")}</span>
           </button>
           <div
-            className="relative flex-1 rounded-3xl overflow-hidden cursor-pointer"
-            style={{ height: "clamp(320px, 45vw, 500px)" }}
-            onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => setHovered(false)}
+            ref={cardRef}
+            className="relative rounded-3xl overflow-hidden cursor-pointer bg-black"
+            style={{ height: "clamp(420px, 75vh, 700px)", width: "clamp(420px, 80vw, 950px)", flexShrink: 0 }}
             onTouchStart={(e) => { touchStartX.current = e.touches[0].clientX; }}
             onTouchEnd={(e) => { const dx = e.changedTouches[0].clientX - touchStartX.current; if (dx < -50) next(); else if (dx > 50) prev(); }}
           >
@@ -291,7 +325,12 @@ const Projects = () => {
             </div>
 
             {/* Disque — dans la carte, z-50 au-dessus de l'overlay z-40 */}
-            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 z-50" style={{ width: DISC_SIZE, height: DISC_SIZE }}>
+            <div
+              className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 z-50"
+              style={{ width: DISC_SIZE, height: DISC_SIZE }}
+              onMouseEnter={(e) => { e.stopPropagation(); setHovered(false); }}
+              onMouseLeave={(e) => { e.stopPropagation(); }}
+            >
               {/* Fond flouté */}
               <div className="absolute inset-4 rounded-full" style={{ background: "rgba(8,12,24,0.75)", backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)", boxShadow: `0 0 40px rgba(8,12,24,0.8), inset 0 0 30px rgba(8,12,24,0.5)` }} />
               {/* Anneau externe avec glow */}
@@ -313,13 +352,13 @@ const Projects = () => {
                     <button key={p.title} onClick={() => goTo(i)} className="absolute -translate-x-1/2 -translate-y-1/2 group" style={{ left: `${cx}%`, top: `${cy}%` }}>
                       <motion.div animate={{ rotate: -rotation }} transition={{ type: "spring", stiffness: 55, damping: 18 }}>
                         {isActive ? (
-                          <div className="relative rounded-xl overflow-hidden" style={{ width: 52, height: 38, boxShadow: `0 0 0 2px ${COLOR}, 0 0 24px ${COLOR}90` }}>
+                          <div className="relative rounded-xl overflow-hidden" style={{ width: 66, height: 48, boxShadow: `0 0 0 2px ${COLOR}, 0 0 24px ${COLOR}90` }}>
                             <img src={p.image} alt={p.title} className="w-full h-full object-cover" />
                             <div className="absolute inset-0" style={{ background: `linear-gradient(135deg, ${COLOR}20 0%, transparent 60%)` }} />
                           </div>
                         ) : (
                           <div className="relative rounded-lg overflow-hidden transition-all duration-300 group-hover:scale-125"
-                            style={{ width: 36, height: 26, boxShadow: `0 0 0 1px ${COLOR}40, 0 0 8px ${COLOR}30`, opacity: 0.65 }}
+                            style={{ width: 46, height: 34, boxShadow: `0 0 0 1px ${COLOR}40, 0 0 8px ${COLOR}30`, opacity: 0.65 }}
                           >
                             <img src={p.image} alt={p.title} className="w-full h-full object-cover" />
                             <div className="absolute inset-0 transition-opacity duration-300" style={{ background: `rgba(8,12,24,0.35)` }} />
@@ -365,16 +404,16 @@ const Projects = () => {
           </div>
           {/* Bouton suivant */}
           <button onClick={next} className="flex-shrink-0 flex flex-col items-center gap-1 group">
-            <div className="w-12 h-12 rounded-full border border-primary/50 bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-background transition-all duration-300 group-hover:scale-110 group-hover:shadow-[0_0_20px_#5EEAC450] backdrop-blur-sm">
+            <div className="w-12 h-12 rounded-full border border-white/20 bg-white/5 flex items-center justify-center text-white/60 group-hover:bg-white group-hover:text-black transition-all duration-300 group-hover:scale-110 backdrop-blur-sm">
               <ChevronRight size={22} strokeWidth={2.5} />
             </div>
-            <span className="text-[10px] font-mono text-white/30 group-hover:text-primary/60 transition-colors">{String(((activeIndex + 1) % N) + 1).padStart(2, "0")}</span>
+            <span className="text-[10px] font-mono text-white/30 group-hover:text-white/60 transition-colors">{String(((activeIndex + 1) % N) + 1).padStart(2, "0")}</span>
           </button>
         </div>
-        <div className="flex justify-center items-center gap-3 mt-16 pb-2">
-          <kbd className="px-2.5 py-1 text-xs font-mono rounded-lg border border-primary/40 bg-primary/10 text-primary font-bold shadow-[0_0_8px_#5EEAC430]">←</kbd>
-          <kbd className="px-2.5 py-1 text-xs font-mono rounded-lg border border-primary/40 bg-primary/10 text-primary font-bold shadow-[0_0_8px_#5EEAC430]">→</kbd>
-          <span className="text-xs font-mono text-primary/60">clavier · glisser · cliquer</span>
+        <div className="flex justify-center items-center gap-3 mt-6 pb-2">
+          <kbd className="px-2.5 py-1 text-xs font-mono rounded-lg border border-white/20 bg-white/5 text-white/60 font-bold">←</kbd>
+          <kbd className="px-2.5 py-1 text-xs font-mono rounded-lg border border-white/20 bg-white/5 text-white/60 font-bold">→</kbd>
+          <span className="text-xs font-mono text-white/30">clavier · glisser · cliquer</span>
         </div>
       </div>
       <AnimatePresence>

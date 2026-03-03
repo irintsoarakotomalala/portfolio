@@ -128,16 +128,10 @@ const Skills = () => {
               transition={{ duration: 0.5, delay: catIdx * 0.1 }}
               className="group relative"
             >
-              <div className={`absolute inset-0 bg-gradient-to-br ${
-                cat.color === 'primary' ? 'from-primary/5 to-primary/0' : 'from-secondary/5 to-secondary/0'
-              } rounded-2xl blur-xl group-hover:blur-2xl transition-all`} />
-              
-              <div className="relative glass-card hover:border-primary/40 transition-all duration-300">
+              <div className="relative glass-card hover:border-white/20 transition-all duration-300">
                 <div className="flex items-center gap-3 mb-6">
-                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
-                    cat.color === 'primary' ? 'bg-primary/10' : 'bg-secondary/10'
-                  }`}>
-                    <cat.icon size={24} className={cat.color === 'primary' ? 'text-primary' : 'text-secondary'} />
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-white/8">
+                    <cat.icon size={24} className="text-white/70" />
                   </div>
                   <h3 className="text-lg font-semibold text-highlight">{cat.title}</h3>
                 </div>
@@ -146,7 +140,7 @@ const Skills = () => {
                   {cat.skills.map((skill) => (
                     <span
                       key={skill}
-                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-background/50 border border-border/30 text-sm font-mono text-foreground/80 hover:border-primary/40 hover:text-primary transition-all"
+                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-background/50 border border-border/30 text-sm font-mono text-foreground/80 hover:border-white/30 hover:text-white transition-all"
                     >
                       {skillIcons[skill] && skillIcons[skill]}
                       {skill}

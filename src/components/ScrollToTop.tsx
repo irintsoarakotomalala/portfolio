@@ -34,11 +34,8 @@ const ScrollToTop = () => {
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.5 }}
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 z-50 w-12 h-12 rounded-full bg-gradient-to-br from-primary to-secondary text-primary-foreground shadow-lg hover:shadow-2xl transition-all duration-300 flex items-center justify-center group"
+          className="fixed bottom-8 right-8 z-50 w-12 h-12 rounded-full bg-white text-black shadow-lg hover:shadow-xl hover:bg-white/90 transition-all duration-300 flex items-center justify-center group"
           aria-label="Retour en haut"
-          style={{
-            boxShadow: '0 0 30px hsl(var(--primary) / 0.4), 0 0 60px hsl(var(--secondary) / 0.2)',
-          }}
         >
           <ArrowUp size={20} className="group-hover:-translate-y-1 transition-transform" />
         </motion.button>

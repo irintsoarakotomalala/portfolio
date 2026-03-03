@@ -39,8 +39,8 @@ const MacOSCard = () => {
       whileHover={{ y: -6 }}
       className="relative w-full max-w-lg"
     >
-      {/* Glow effect */}
-      <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-primary/30 via-secondary/20 to-primary/10 blur-xl opacity-60" />
+      {/* Subtle glow */}
+      <div className="absolute -inset-1 rounded-2xl bg-white/5 blur-xl opacity-50" />
 
       {/* macOS Window */}
       <div
@@ -143,7 +143,7 @@ const MacOSCard = () => {
 
                   {line.type === "entry" && (
                     <>
-                      <span style={{ color: "#C77DFF" }}>"{line.key}"</span>
+                      <span style={{ color: "rgba(255,255,255,0.6)" }}>"{line.key}"</span>
                       <span style={{ color: "rgba(255,255,255,0.4)" }}>: </span>
                       {line.isLink ? (
                         <a
@@ -151,12 +151,12 @@ const MacOSCard = () => {
                           target="_blank"
                           rel="noopener noreferrer"
                           className="hover:underline"
-                          style={{ color: "#5EEAC4" }}
+                          style={{ color: "rgba(255,255,255,0.85)" }}
                         >
                           {line.value}
                         </a>
                       ) : (
-                        <span style={{ color: "#5EEAC4" }}>{line.value}</span>
+                        <span style={{ color: "rgba(255,255,255,0.85)" }}>{line.value}</span>
                       )}
                       <span style={{ color: "rgba(255,255,255,0.3)" }}>,</span>
                     </>
@@ -164,7 +164,7 @@ const MacOSCard = () => {
 
                   {line.type === "array-open" && (
                     <>
-                      <span style={{ color: "#C77DFF" }}>"{line.key}"</span>
+                      <span style={{ color: "rgba(255,255,255,0.6)" }}>"{line.key}"</span>
                       <span style={{ color: "rgba(255,255,255,0.4)" }}>: </span>
                       <span style={{ color: "rgba(255,255,255,0.5)" }}>[</span>
                     </>
@@ -175,7 +175,7 @@ const MacOSCard = () => {
                       <span style={{ color: "rgba(255,255,255,0)" }}>
                         {"  "}
                       </span>
-                      <span style={{ color: "#5EEAC4", paddingLeft: "1rem" }}>
+                      <span style={{ color: "rgba(255,255,255,0.85)", paddingLeft: "1rem" }}>
                         {line.value}
                       </span>
                       {line.comma && (
@@ -203,7 +203,7 @@ const MacOSCard = () => {
               </span>
               <span
                 className="text-xs inline-block w-2 h-4 typing-cursor"
-                style={{ background: "#5EEAC4", opacity: 0.7 }}
+                style={{ background: "rgba(255,255,255,0.7)", opacity: 0.7 }}
               />
             </div>
           </div>
@@ -215,7 +215,7 @@ const MacOSCard = () => {
           style={{ background: "rgba(255,255,255,0.02)" }}
         >
           <div className="flex items-center gap-3">
-            <span className="text-xs font-mono" style={{ color: "#5EEAC480" }}>
+            <span className="text-xs font-mono" style={{ color: "rgba(255,255,255,0.35)" }}>
               JSON
             </span>
             <span className="text-xs font-mono" style={{ color: "rgba(255,255,255,0.2)" }}>

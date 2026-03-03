@@ -45,7 +45,7 @@ const AnimatedBackground = () => {
 
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(94, 234, 212, 0.3)';
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
         ctx.fill();
 
         particles.forEach((particle2, j) => {
@@ -58,7 +58,7 @@ const AnimatedBackground = () => {
             ctx.beginPath();
             ctx.moveTo(particle.x, particle.y);
             ctx.lineTo(particle2.x, particle2.y);
-            ctx.strokeStyle = `rgba(94, 234, 212, ${0.15 * (1 - distance / 150)})`;
+            ctx.strokeStyle = `rgba(255, 255, 255, ${0.08 * (1 - distance / 150)})`;
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }

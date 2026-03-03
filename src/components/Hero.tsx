@@ -22,13 +22,12 @@ const Hero = () => {
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Animated mesh gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-background via-[#0F1419] to-background">
-        <div className="absolute inset-0 opacity-30">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full mix-blend-screen filter blur-3xl animate-blob" />
-          <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-secondary/20 rounded-full mix-blend-screen filter blur-3xl animate-blob animation-delay-2000" />
-          <div className="absolute bottom-1/4 left-1/3 w-96 h-96 bg-primary/10 rounded-full mix-blend-screen filter blur-3xl animate-blob animation-delay-4000" />
-        </div>
+      {/* Subtle grid background */}
+      <div className="absolute inset-0 bg-background">
+        <div className="absolute inset-0 opacity-[0.04]" style={{
+          backgroundImage: "linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)",
+          backgroundSize: "60px 60px"
+        }} />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-20">
@@ -45,10 +44,10 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 mb-5"
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/15 mb-5"
             >
-              <Sparkles size={13} className="text-primary" />
-              <span className="text-xs font-mono text-primary">Disponible pour des projets</span>
+              <Sparkles size={13} className="text-white/60" />
+              <span className="text-xs font-mono text-white/60">Disponible pour des projets</span>
             </motion.div>
 
             {/* Name with gradient */}
@@ -58,7 +57,7 @@ const Hero = () => {
               transition={{ delay: 0.3 }}
               className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 leading-tight"
             >
-              <span className="bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient">
+              <span className="text-white">
                 RAKOTOMALALA
               </span>
               <br />
@@ -106,17 +105,16 @@ const Hero = () => {
             >
               <a
                 href="#projects"
-                className="group relative px-6 py-2.5 bg-gradient-to-r from-primary to-secondary rounded-full font-semibold text-sm text-background overflow-hidden transition-all hover:scale-105 hover:shadow-2xl hover:shadow-primary/50"
+                className="group relative px-6 py-2.5 bg-white rounded-full font-semibold text-sm text-black overflow-hidden transition-all hover:scale-105 hover:bg-white/90 hover:shadow-xl"
               >
                 <span className="relative z-10 flex items-center gap-2">
                   <Code2 size={16} />
                   Voir mes projets
                 </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-secondary to-primary opacity-0 group-hover:opacity-100 transition-opacity" />
               </a>
               <a
                 href="#contact"
-                className="px-6 py-2.5 border-2 border-primary/30 rounded-full font-semibold text-sm text-primary hover:bg-primary/10 transition-all hover:border-primary"
+                className="px-6 py-2.5 border border-white/20 rounded-full font-semibold text-sm text-white/70 hover:bg-white/5 transition-all hover:border-white/40 hover:text-white"
               >
                 Me contacter
               </a>
@@ -139,7 +137,7 @@ const Hero = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="w-9 h-9 rounded-full border border-primary/30 flex items-center justify-center text-primary hover:bg-primary hover:text-background transition-all hover:scale-110"
+                  className="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:bg-white/10 hover:text-white transition-all hover:scale-110"
                 >
                   <Icon size={16} />
                 </a>
@@ -159,7 +157,7 @@ const Hero = () => {
         href="#about"
         animate={{ y: [0, 10, 0] }}
         transition={{ repeat: Infinity, duration: 2 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-primary/60 hover:text-primary transition-colors"
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/30 hover:text-white/60 transition-colors"
       >
         <span className="text-xs font-mono">Scroll</span>
         <ChevronDown size={20} />

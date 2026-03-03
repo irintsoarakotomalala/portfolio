@@ -46,7 +46,7 @@ const experiences = [
 
 const Experience = () => {
   return (
-    <section id="experience" className="section-padding">
+    <section id="experience" className="px-6 pb-20 pt-2 md:px-12 lg:px-24 xl:px-32">
       <div className="max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -89,15 +89,15 @@ const Experience = () => {
                   <div className="glass-card">
                     <div className="flex items-center gap-2 mb-2 justify-start">
                       {exp.type === "work" ? (
-                        <Briefcase size={16} className="text-primary" />
+                        <Briefcase size={16} className="text-white/60" />
                       ) : (
-                        <GraduationCap size={16} className="text-primary" />
+                        <GraduationCap size={16} className="text-white/60" />
                       )}
-                      <span className="text-xs font-mono text-primary">
+                      <span className="text-xs font-mono text-white/50">
                         {exp.period}
                       </span>
                     </div>
-                    <div className="inline-block px-3 py-1.5 mb-2 rounded-lg bg-gradient-to-r from-primary/20 to-secondary/20 border border-primary/30">
+                    <div className="inline-block px-3 py-1.5 mb-2 rounded-lg bg-white/8 border border-white/10">
                       <h3 className="text-lg font-bold text-white">
                         {exp.company}
                       </h3>
