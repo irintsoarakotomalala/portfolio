@@ -61,8 +61,8 @@ import b2b7 from "../assets/B2B/7.png";
 const COLOR = "#FFFFFF";
 const DISC_R = 110;
 const DISC_SIZE = DISC_R * 2 + 120;
-const DISC_R_MOBILE = 60;
-const DISC_SIZE_MOBILE = DISC_R_MOBILE * 2 + 80;
+const DISC_R_MOBILE = 75;
+const DISC_SIZE_MOBILE = DISC_R_MOBILE * 2 + 90;
 
 const allProjects = [
 	{
@@ -147,7 +147,7 @@ const Projects = () => {
 
 	// Détection mobile
 	useEffect(() => {
-		const check = () => setIsMobile(window.innerWidth < 640);
+		const check = () => setIsMobile(window.innerWidth < 700);
 		check();
 		window.addEventListener("resize", check);
 		return () => window.removeEventListener("resize", check);
@@ -251,7 +251,7 @@ const Projects = () => {
 			const dx = mx - cx;
 			const dy = my - cy;
 			const dist = Math.sqrt(dx * dx + dy * dy);
-			const currentDiscSize = window.innerWidth < 640 ? DISC_SIZE_MOBILE : DISC_SIZE;
+			const currentDiscSize = window.innerWidth < 700 ? DISC_SIZE_MOBILE : DISC_SIZE;
 			setHovered(dist >= currentDiscSize / 2);
 		};
 		window.addEventListener("mousemove", handleMouseMove);
@@ -267,7 +267,7 @@ const Projects = () => {
 			className="section-padding overflow-visible"
 			style={{ paddingBottom: `calc(1rem + ${discSize / 2}px)` }}
 		>
-			<div className="max-w-7xl mx-auto">
+			<div className="max-w-7xl mx-auto w-full">
 				<motion.div
 					initial={{ opacity: 0, y: 30 }}
 					whileInView={{ opacity: 1, y: 0 }}
@@ -299,7 +299,7 @@ const Projects = () => {
 							<span className="text-base md:text-lg font-mono text-white/25">
 								/ {String(N).padStart(2, "0")}
 							</span>
-							<span className="text-xs md:text-sm font-mono text-white/40 ml-1 tracking-widest uppercase">
+							<span className="text-xs md:text-sm font-mono text-white/40 ml-1 tracking-widest">
 								{project.shortTitle}
 							</span>
 						</motion.div>
@@ -321,46 +321,58 @@ const Projects = () => {
 				</div>
 
 				{/* Layout mobile : boutons AU-DESSUS/EN-DESSOUS, layout desktop : boutons sur les côtés */}
-				<div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 justify-center">
+				<div className={`flex items-center gap-3 w-full ${isMobile ? "flex-col" : "flex-row justify-center"}`}>
 					{/* Boutons mobile : rangée horizontale au-dessus */}
-					<div className="flex sm:hidden w-full justify-between px-2">
-						<button
-							onClick={prev}
-							className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/20 bg-white/5 text-white/60 hover:bg-white hover:text-black transition-all text-sm font-mono"
-						>
-							<ChevronLeft size={16} /> Préc.
-						</button>
-						<button
-							onClick={next}
-							className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/20 bg-white/5 text-white/60 hover:bg-white hover:text-black transition-all text-sm font-mono"
-						>
-							Suiv. <ChevronRight size={16} />
-						</button>
-					</div>
+					{isMobile && (
+						<div className="flex w-full justify-between px-2">
+							<button
+								onClick={prev}
+								className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/20 bg-white/5 text-white/60 hover:bg-white hover:text-black transition-all text-sm font-mono"
+							>
+								<ChevronLeft size={16} /> Préc.
+							</button>
+							<button
+								onClick={next}
+								className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/20 bg-white/5 text-white/60 hover:bg-white hover:text-black transition-all text-sm font-mono"
+							>
+								Suiv. <ChevronRight size={16} />
+							</button>
+						</div>
+					)}
 
 					{/* Bouton précédent desktop */}
-					<button
-						onClick={prev}
-						className="hidden sm:flex flex-shrink-0 flex-col items-center gap-1 group"
-					>
-						<div className="w-11 h-11 rounded-full border border-white/20 bg-white/5 flex items-center justify-center text-white/60 group-hover:bg-white group-hover:text-black transition-all group-hover:scale-110">
-							<ChevronLeft size={20} />
-						</div>
-						<span className="text-[10px] font-mono text-white/30 group-hover:text-white/60 transition-colors">
-							{String(((activeIndex - 1 + N) % N) + 1).padStart(2, "0")}
-						</span>
-					</button>
+					{!isMobile && (
+						<button
+							onClick={prev}
+							className="flex flex-shrink-0 flex-col items-center gap-1 group"
+						>
+							<div className="w-11 h-11 rounded-full border border-white/20 bg-white/5 flex items-center justify-center text-white/60 group-hover:bg-white group-hover:text-black transition-all group-hover:scale-110">
+								<ChevronLeft size={20} />
+							</div>
+							<span className="text-[10px] font-mono text-white/30 group-hover:text-white/60 transition-colors">
+								{String(((activeIndex - 1 + N) % N) + 1).padStart(2, "0")}
+							</span>
+						</button>
+					)}
 
 					{/* Carte principale */}
 					<div
 						ref={cardRef}
 						className="relative rounded-2xl md:rounded-3xl overflow-hidden cursor-pointer bg-black"
-						style={{
-							// Mobile : format portrait, Desktop : format paysage large
-							height: isMobile ? "clamp(420px, 85vw, 600px)" : "clamp(420px, 75vh, 700px)",
-							width: isMobile ? "clamp(260px, 92vw, 400px)" : "clamp(420px, 80vw, 950px)",
-							flexShrink: 0,
-						}}
+						style={
+							isMobile
+								? {
+										width: "min(calc(100vw - 48px), 400px)",
+										height: "clamp(500px, 160vw, 720px)",
+										flexShrink: 0,
+										alignSelf: "center",
+									}
+								: {
+										height: "clamp(420px, 75vh, 700px)",
+										width: "clamp(420px, 80vw, 950px)",
+										flexShrink: 0,
+									}
+						}
 						onTouchStart={(e) => { touchStartX.current = e.touches[0].clientX; }}
 						onTouchEnd={(e) => { const dx = e.changedTouches[0].clientX - touchStartX.current; if (dx < -50) next(); else if (dx > 50) prev(); }}
 					>
@@ -692,35 +704,35 @@ const Projects = () => {
 					</div>
 
 					{/* Bouton suivant desktop */}
-					<button
-						onClick={next}
-						className="hidden sm:flex flex-shrink-0 flex-col items-center gap-1 group"
-					>
-						<div className="w-12 h-12 rounded-full border border-white/20 bg-white/5 flex items-center justify-center text-white/60 group-hover:bg-white group-hover:text-black transition-all duration-300 group-hover:scale-110 backdrop-blur-sm">
-							<ChevronRight size={22} strokeWidth={2.5} />
-						</div>
-						<span className="text-[10px] font-mono text-white/30 group-hover:text-white/60 transition-colors">
-							{String(((activeIndex + 1) % N) + 1).padStart(2, "0")}
-						</span>
-					</button>
+					{!isMobile && (
+						<button
+							onClick={next}
+							className="flex flex-shrink-0 flex-col items-center gap-1 group"
+						>
+							<div className="w-12 h-12 rounded-full border border-white/20 bg-white/5 flex items-center justify-center text-white/60 group-hover:bg-white group-hover:text-black transition-all duration-300 group-hover:scale-110 backdrop-blur-sm">
+								<ChevronRight size={22} strokeWidth={2.5} />
+							</div>
+							<span className="text-[10px] font-mono text-white/30 group-hover:text-white/60 transition-colors">
+								{String(((activeIndex + 1) % N) + 1).padStart(2, "0")}
+							</span>
+						</button>
+					)}
 				</div>
 
 				{/* Hint clavier — desktop seulement */}
-				<div className="hidden sm:flex justify-center items-center gap-3 mt-6 pb-2">
-					<kbd className="px-2.5 py-1 text-xs font-mono rounded-lg border border-white/20 bg-white/5 text-white/60 font-bold">
-						←
-					</kbd>
-					<kbd className="px-2.5 py-1 text-xs font-mono rounded-lg border border-white/20 bg-white/5 text-white/60 font-bold">
-						→
-					</kbd>
-					<span className="text-xs font-mono text-white/30">
-						clavier · glisser · cliquer
-					</span>
-				</div>
+				{!isMobile && (
+					<div className="flex justify-center items-center gap-3 mt-6 pb-2">
+						<kbd className="px-2.5 py-1 text-xs font-mono rounded-lg border border-white/20 bg-white/5 text-white/60 font-bold">←</kbd>
+						<kbd className="px-2.5 py-1 text-xs font-mono rounded-lg border border-white/20 bg-white/5 text-white/60 font-bold">→</kbd>
+						<span className="text-xs font-mono text-white/30">clavier · glisser · cliquer</span>
+					</div>
+				)}
 				{/* Hint swipe — mobile seulement */}
-				<div className="flex sm:hidden justify-center mt-4">
-					<span className="text-xs font-mono text-white/30">← glisser →</span>
-				</div>
+				{isMobile && (
+					<div className="flex justify-center mt-4">
+						<span className="text-xs font-mono text-white/30">← glisser →</span>
+					</div>
+				)}
 			</div>
 
 			{/* Galerie */}

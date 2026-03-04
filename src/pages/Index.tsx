@@ -13,7 +13,7 @@ import CustomCursor from "@/components/CustomCursor";
 
 const Index = () => {
   return (
-    <main className="bg-background min-h-screen relative">
+        <main className="bg-background min-h-screen relative overflow-x-hidden">
       <CustomCursor />
       <ScrollProgress />
       <AnimatedBackground />
