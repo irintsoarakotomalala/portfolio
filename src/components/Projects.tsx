@@ -2,12 +2,12 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Github, X, ChevronLeft, ChevronRight, ArrowUpRight, Images } from "lucide-react";
 // VPI site vitrine
-import vpiBg from "../assets/VPI site vitrine/bg.png";
-import vpiBgMobile from "../assets/VPI site vitrine/bg_mobile.png";
-import vpi1 from "../assets/VPI site vitrine/1.png";
-import vpi2 from "../assets/VPI site vitrine/2.png";
-import vpi3 from "../assets/VPI site vitrine/3.png";
-import vpi4 from "../assets/VPI site vitrine/4.png";
+import vpiBg from "../assets/VPI_site_vitrine/bg.png";
+import vpiBgMobile from "../assets/VPI_site_vitrine/bg_mobile.png";
+import vpi1 from "../assets/VPI_site_vitrine/1.png";
+import vpi2 from "../assets/VPI_site_vitrine/2.png";
+import vpi3 from "../assets/VPI_site_vitrine/3.png";
+import vpi4 from "../assets/VPI_site_vitrine/4.png";
 // MADAVISION
 import madaBg from "../assets/MADAVISION/bg.png";
 import madaBgMobile from "../assets/MADAVISION/bg_mobile.png";
@@ -39,14 +39,14 @@ import madagascart1 from "../assets/madagascart/1.png";
 import madagascart2 from "../assets/madagascart/2.png";
 import madagascart3 from "../assets/madagascart/3.png";
 // VPI app mobile
-import vpiAppBg from "../assets/VPI app/bg.png";
-import vpiAppBgMobile from "../assets/VPI app/bg_mobile.jpg";
-import vpiApp1 from "../assets/VPI app/1.png";
-import vpiApp2 from "../assets/VPI app/2.png";
-import vpiApp3 from "../assets/VPI app/3.png";
-import vpiApp4 from "../assets/VPI app/4.png";
-import vpiApp5 from "../assets/VPI app/5.png";
-import vpiApp6 from "../assets/VPI app/6.png";
+import vpiAppBg from "../assets/VPI_app/bg.png";
+import vpiAppBgMobile from "../assets/VPI_app/bg_mobile.jpg";
+import vpiApp1 from "../assets/VPI_app/1.png";
+import vpiApp2 from "../assets/VPI_app/2.png";
+import vpiApp3 from "../assets/VPI_app/3.png";
+import vpiApp4 from "../assets/VPI_app/4.png";
+import vpiApp5 from "../assets/VPI_app/5.png";
+import vpiApp6 from "../assets/VPI_app/6.png";
 // B2B
 import b2bBg from "../assets/B2B/bg.png";
 import b2bBgMobile from "../assets/B2B/bg_mobile.png";
