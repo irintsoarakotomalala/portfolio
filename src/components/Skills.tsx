@@ -105,8 +105,14 @@ const categories = [
 
 const Skills = () => {
   return (
-    <section id="skills" className="section-padding bg-section-alt">
-      <div className="max-w-6xl mx-auto">
+    <section id="skills" className="section-padding bg-[#0a0a0f] relative overflow-hidden">
+      {/* Violet glow — same as hero */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-0" style={{
+          background: "radial-gradient(ellipse 60% 60% at 80% 50%, rgba(139,92,246,0.38) 0%, transparent 70%)"
+        }} />
+      </div>
+      <div className="max-w-6xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}

@@ -3,7 +3,7 @@ import { User, Heart, Globe } from "lucide-react";
 
 const About = () => {
   return (
-    <section id="about" className="section-padding bg-section-alt">
+    <section id="about" className="section-padding bg-[#0d0d18]">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

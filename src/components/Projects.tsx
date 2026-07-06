@@ -264,7 +264,7 @@ const Projects = () => {
 	return (
 		<section
 			id="projects"
-			className="section-padding overflow-visible"
+			className="section-padding bg-[#0d0d18] overflow-visible"
 			style={{ paddingBottom: `calc(1rem + ${discSize / 2}px)` }}
 		>
 			<div className="max-w-7xl mx-auto w-full">
