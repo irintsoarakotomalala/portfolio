@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Github, Linkedin, ChevronDown, Mail } from "lucide-react";
+import sarikoImg from "../assets/sariko.png";
 
 const Hero = () => {
   return (
@@ -141,7 +142,7 @@ const Hero = () => {
 
           {/* Photo */}
           <img
-            src="/sariko.png"
+            src={sarikoImg}
             alt="Irintsoa"
             className="relative z-10 h-full max-h-[95vh] w-auto object-contain object-bottom drop-shadow-2xl"
             style={{ filter: "drop-shadow(0 0 60px rgba(139,92,246,0.4))" }}
