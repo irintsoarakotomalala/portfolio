@@ -16,8 +16,8 @@ const About = () => {
         {/* Stats rapides */}
         <RevealOnScroll className="grid grid-cols-3 gap-4 mb-10">
           {[
-            { value: 3, suffix: "+", label: "ans d'expérience" },
-            { value: 10, suffix: "+", label: "projets livrés" },
+            { value: 2, suffix: "+", label: "ans d'expérience" },
+            { value: 5, suffix: "+", label: "projets livrés" },
             { value: 4, suffix: "", label: "technologies maîtrisées" },
           ].map((stat, i) => (
             <div key={i} className="text-center p-4 rounded-xl border border-white/10 bg-white/5">
