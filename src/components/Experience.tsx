@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Briefcase, GraduationCap } from "lucide-react";
+import RevealOnScroll from "./bits/RevealOnScroll";
 
 const experiences = [
   {
@@ -71,19 +72,22 @@ const Experience = () => {
           {experiences.map((exp, i) => {
             const isLeft = i % 2 === 0;
             return (
-              <motion.div
+              <RevealOnScroll
                 key={i}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
+                delay={i * 0.08}
                 className={`relative flex items-start mb-10 md:mb-12 ${
                   isLeft ? "md:flex-row" : "md:flex-row-reverse"
                 }`}
               >
                 {/* Dot */}
                 <div className="absolute left-4 md:left-1/2 -translate-x-1/2 z-10">
-                  <div className="timeline-dot" />
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    whileInView={{ scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.08 + 0.3, type: "spring", stiffness: 300 }}
+                    className="timeline-dot"
+                  />
                 </div>
 
                 {/* Content */}
@@ -92,7 +96,11 @@ const Experience = () => {
                     isLeft ? "md:pr-12" : "md:pl-12"
                   }`}
                 >
-                  <div className="glass-card">
+                  <motion.div
+                    whileHover={{ scale: 1.02, x: isLeft ? -4 : 4 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                    className="glass-card"
+                  >
                     <div className="flex items-center gap-2 mb-2 justify-start">
                       {exp.type === "work" ? (
                         <Briefcase size={16} className="text-white/60" />
@@ -114,9 +122,9 @@ const Experience = () => {
                     <p className="text-sm text-foreground/70 leading-relaxed">
                       {exp.description}
                     </p>
-                  </div>
+                  </motion.div>
                 </div>
-              </motion.div>
+              </RevealOnScroll>
             );
           })}
         </div>

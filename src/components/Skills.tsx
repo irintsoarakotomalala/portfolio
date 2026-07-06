@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 import { Code2, Palette, Database, Zap } from "lucide-react";
+import RevealOnScroll from "./bits/RevealOnScroll";
+import TiltCard from "./bits/TiltCard";
 
 const skillIcons: Record<string, JSX.Element> = {
   "HTML/CSS": (
@@ -113,48 +115,41 @@ const Skills = () => {
         }} />
       </div>
       <div className="max-w-6xl mx-auto relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
+        <RevealOnScroll className="text-center mb-16">
           <p className="section-subtitle">02. Compétences</p>
           <h2 className="section-title">Ma stack technique</h2>
-        </motion.div>
+        </RevealOnScroll>
 
         <div className="grid md:grid-cols-2 gap-6">
           {categories.map((cat, catIdx) => (
-            <motion.div
-              key={cat.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: catIdx * 0.1 }}
-              className="group relative"
-            >
-              <div className="relative glass-card hover:border-white/20 transition-all duration-300">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-white/8">
-                    <cat.icon size={24} className="text-white/70" />
+            <RevealOnScroll key={cat.title} delay={catIdx * 0.1}>
+              <TiltCard intensity={8}>
+                <div className="relative glass-card hover:border-white/20 transition-all duration-300">
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-white/8">
+                      <cat.icon size={24} className="text-white/70" />
+                    </div>
+                    <h3 className="text-lg font-semibold text-highlight">{cat.title}</h3>
                   </div>
-                  <h3 className="text-lg font-semibold text-highlight">{cat.title}</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {cat.skills.map((skill, si) => (
+                      <motion.span
+                        key={skill}
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: catIdx * 0.1 + si * 0.05, type: "spring", stiffness: 200 }}
+                        whileHover={{ scale: 1.08, y: -2 }}
+                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-background/50 border border-border/30 text-sm font-mono text-foreground/80 hover:border-[#C77DFF]/50 hover:text-white transition-colors cursor-default"
+                      >
+                        {skillIcons[skill] && skillIcons[skill]}
+                        {skill}
+                      </motion.span>
+                    ))}
+                  </div>
                 </div>
-                
-                <div className="flex flex-wrap gap-2">
-                  {cat.skills.map((skill) => (
-                    <span
-                      key={skill}
-                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-background/50 border border-border/30 text-sm font-mono text-foreground/80 hover:border-white/30 hover:text-white transition-all"
-                    >
-                      {skillIcons[skill] && skillIcons[skill]}
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
+              </TiltCard>
+            </RevealOnScroll>
           ))}
         </div>
       </div>

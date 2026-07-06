@@ -3,6 +3,8 @@ import { motion } from "framer-motion";
 import { Send, Mail, MapPin, Github, Linkedin } from "lucide-react";
 import { toast } from "sonner";
 import emailjs from '@emailjs/browser';
+import MagneticButton from "./bits/MagneticButton";
+import RevealOnScroll from "./bits/RevealOnScroll";
 
 const Contact = () => {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
@@ -116,14 +118,16 @@ const Contact = () => {
                 placeholder="Décrivez votre projet..."
               />
             </div>
-            <button
-              type="submit"
-              disabled={sending}
-              className="cta-button-filled w-full sm:w-auto flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              <Send size={16} />
-              {sending ? "Envoi en cours..." : "Envoyer"}
-            </button>
+            <MagneticButton>
+              <button
+                type="submit"
+                disabled={sending}
+                className="cta-button-filled w-full sm:w-auto flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <Send size={16} />
+                {sending ? "Envoi en cours..." : "Envoyer"}
+              </button>
+            </MagneticButton>
           </motion.form>
 
           {/* Info */}

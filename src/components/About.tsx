@@ -1,31 +1,39 @@
 import { motion } from "framer-motion";
 import { User, Heart, Globe } from "lucide-react";
+import RevealOnScroll from "./bits/RevealOnScroll";
+import TiltCard from "./bits/TiltCard";
+import CountUp from "./bits/CountUp";
 
 const About = () => {
   return (
     <section id="about" className="section-padding bg-[#0d0d18]">
       <div className="max-w-6xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
+        <RevealOnScroll className="text-center mb-10">
           <p className="section-subtitle">01. À propos</p>
           <h2 className="section-title">Qui suis-je ?</h2>
-        </motion.div>
+        </RevealOnScroll>
+
+        {/* Stats rapides */}
+        <RevealOnScroll className="grid grid-cols-3 gap-4 mb-10">
+          {[
+            { value: 3, suffix: "+", label: "ans d'expérience" },
+            { value: 10, suffix: "+", label: "projets livrés" },
+            { value: 4, suffix: "", label: "technologies maîtrisées" },
+          ].map((stat, i) => (
+            <div key={i} className="text-center p-4 rounded-xl border border-white/10 bg-white/5">
+              <div className="text-3xl font-black text-[#C77DFF]">
+                <CountUp to={stat.value} suffix={stat.suffix} duration={2} />
+              </div>
+              <div className="text-xs text-white/50 font-mono mt-1">{stat.label}</div>
+            </div>
+          ))}
+        </RevealOnScroll>
 
         {/* Main content with bento grid */}
         <div className="grid md:grid-cols-12 gap-4">
           {/* Large bio card */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="md:col-span-8 md:row-span-2 group relative"
-          >
+          <RevealOnScroll className="md:col-span-8 md:row-span-2 group relative">
+          <TiltCard className="h-full">
             <div className="relative h-full glass-card p-6 sm:p-8 hover:border-white/20 transition-all">
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-white/10 flex items-center justify-center">
@@ -50,16 +58,12 @@ const About = () => {
                 </p>
               </div>
             </div>
-          </motion.div>
+          </TiltCard>
+          </RevealOnScroll>
 
           {/* Languages card */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="md:col-span-4 group relative"
-          >
+          <RevealOnScroll className="md:col-span-4 group relative" delay={0.15}>
+          <TiltCard className="h-full">
             <div className="relative h-full glass-card p-6 hover:border-white/20 transition-all">
               <div className="flex items-center gap-2 mb-4">
                 <Globe size={20} className="text-white/60" />
@@ -89,16 +93,12 @@ const About = () => {
                 ))}
               </div>
             </div>
-          </motion.div>
+          </TiltCard>
+          </RevealOnScroll>
 
           {/* Hobbies card */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="md:col-span-4 group relative"
-          >
+          <RevealOnScroll className="md:col-span-4 group relative" delay={0.25}>
+          <TiltCard className="h-full">
             <div className="relative h-full glass-card p-6 hover:border-white/20 transition-all">
               <div className="flex items-center gap-2 mb-4">
                 <Heart size={20} className="text-white/60" />
@@ -120,7 +120,8 @@ const About = () => {
                 ))}
               </div>
             </div>
-          </motion.div>
+          </TiltCard>
+          </RevealOnScroll>
         </div>
       </div>
     </section>
