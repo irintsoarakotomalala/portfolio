@@ -34,7 +34,8 @@ const ScrollToTop = () => {
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.5 }}
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 z-50 w-12 h-12 rounded-full bg-white text-black shadow-lg hover:shadow-xl hover:bg-white/90 transition-all duration-300 flex items-center justify-center group"
+          className="fixed bottom-8 right-8 z-50 w-12 h-12 rounded-full flex items-center justify-center group transition-all duration-300 hover:scale-110"
+      style={{ background: '#C4A050', color: '#16140f' }}
           aria-label="Retour en haut"
         >
           <ArrowUp size={20} className="group-hover:-translate-y-1 transition-transform" />
