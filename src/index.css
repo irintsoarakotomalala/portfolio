@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Barlow+Condensed:wght@700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,50 +6,51 @@
 
 @layer base {
   :root {
-    --background: 0 0% 6%;
-    --foreground: 0 0% 90%;
+    /* WAYBETTER-inspired: dark charcoal + gold accent */
+    --background: 30 8% 9%;
+    --foreground: 40 15% 85%;
 
-    --card: 0 0% 9%;
-    --card-foreground: 0 0% 90%;
+    --card: 30 8% 12%;
+    --card-foreground: 40 15% 85%;
 
-    --popover: 0 0% 9%;
-    --popover-foreground: 0 0% 90%;
+    --popover: 30 8% 12%;
+    --popover-foreground: 40 15% 85%;
 
-    --primary: 0 0% 95%;
-    --primary-foreground: 0 0% 6%;
+    --primary: 40 65% 55%;
+    --primary-foreground: 30 8% 9%;
 
-    --secondary: 0 0% 70%;
-    --secondary-foreground: 0 0% 6%;
+    --secondary: 30 8% 18%;
+    --secondary-foreground: 40 15% 85%;
 
-    --muted: 0 0% 13%;
-    --muted-foreground: 0 0% 55%;
+    --muted: 30 8% 15%;
+    --muted-foreground: 40 10% 50%;
 
-    --accent: 0 0% 70%;
-    --accent-foreground: 0 0% 6%;
+    --accent: 40 65% 55%;
+    --accent-foreground: 30 8% 9%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 0 0% 18%;
-    --input: 0 0% 13%;
-    --ring: 0 0% 80%;
+    --border: 30 8% 20%;
+    --input: 30 8% 15%;
+    --ring: 40 65% 55%;
 
-    --radius: 0.75rem;
+    --radius: 1rem;
 
-    --sidebar-background: 0 0% 4%;
-    --sidebar-foreground: 0 0% 90%;
-    --sidebar-primary: 0 0% 95%;
-    --sidebar-primary-foreground: 0 0% 6%;
-    --sidebar-accent: 0 0% 13%;
-    --sidebar-accent-foreground: 0 0% 90%;
-    --sidebar-border: 0 0% 18%;
-    --sidebar-ring: 0 0% 80%;
+    --sidebar-background: 30 8% 7%;
+    --sidebar-foreground: 40 15% 85%;
+    --sidebar-primary: 40 65% 55%;
+    --sidebar-primary-foreground: 30 8% 9%;
+    --sidebar-accent: 30 8% 15%;
+    --sidebar-accent-foreground: 40 15% 85%;
+    --sidebar-border: 30 8% 20%;
+    --sidebar-ring: 40 65% 55%;
 
     /* Custom tokens */
-    --highlight: 0 0% 97%;
-    --glow: 0 0% 80%;
-    --navy-light: 0 0% 22%;
-    --section-alt: 0 0% 8%;
+    --highlight: 40 20% 95%;
+    --gold: 40 65% 55%;
+    --charcoal: 30 8% 14%;
+    --section-alt: 30 8% 7%;
   }
 }
 
@@ -69,7 +70,7 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-bold tracking-tight;
+    @apply font-bold;
     color: hsl(var(--highlight));
   }
 
@@ -95,17 +96,16 @@
   }
 
   .glass-card {
-    @apply rounded-xl border border-border/40 p-6;
-    background: hsl(var(--card) / 0.9);
-    box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.4);
+    @apply rounded-2xl border border-border/30 p-6;
+    background: hsl(var(--charcoal));
   }
 
   .glow-text {
-    color: hsl(var(--primary));
+    color: hsl(var(--gold));
   }
 
   .glow-border {
-    box-shadow: 0 0 20px rgba(255,255,255,0.08);
+    box-shadow: 0 0 20px rgba(196,160,80,0.12);
   }
 
   .nav-link {
@@ -128,59 +128,52 @@
   }
 
   .skill-icon-card {
-    @apply flex flex-col items-center gap-2 p-5 rounded-xl border border-border/20 transition-all duration-300;
-    background: hsl(var(--card) / 0.7);
+    @apply flex flex-col items-center gap-2 p-5 rounded-2xl border border-border/20 transition-all duration-300;
+    background: hsl(var(--charcoal));
   }
 
   .skill-icon-card:hover {
-    @apply border-white/30;
-    background: hsl(var(--card));
-    transform: translateY(-6px) scale(1.05);
-    box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+    border-color: hsl(var(--gold) / 0.4);
+    transform: translateY(-4px);
   }
 
   .project-card {
-    @apply rounded-xl overflow-hidden border border-border/20 transition-all duration-500;
-    background: hsl(var(--card) / 0.7);
+    @apply rounded-2xl overflow-hidden border border-border/20 transition-all duration-500;
+    background: hsl(var(--charcoal));
   }
 
   .project-card:hover {
-    @apply border-white/20;
-    transform: translateY(-8px);
-    box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+    border-color: hsl(var(--gold) / 0.3);
+    transform: translateY(-6px);
   }
 
   .timeline-dot {
-    @apply w-4 h-4 rounded-full border-2 border-primary;
-    background: hsl(var(--primary));
-    box-shadow: 0 0 10px rgba(255,255,255,0.3);
+    @apply w-3 h-3 rounded-full;
+    background: hsl(var(--gold));
+    box-shadow: 0 0 8px hsl(var(--gold) / 0.5);
   }
 
   .cta-button {
-    @apply px-6 py-3 rounded-lg font-mono text-sm font-medium transition-all duration-300 border-2;
-    border-color: hsl(var(--primary));
-    color: hsl(var(--primary));
+    @apply px-6 py-3 rounded-full font-mono text-sm font-medium transition-all duration-300 border;
+    border-color: hsl(var(--gold) / 0.5);
+    color: hsl(var(--gold));
     background: transparent;
   }
 
   .cta-button:hover {
-    background: hsl(var(--primary) / 0.1);
-    box-shadow: 0 0 20px rgba(255,255,255,0.1);
-    transform: translateY(-2px);
+    background: hsl(var(--gold) / 0.1);
+    border-color: hsl(var(--gold));
   }
 
   .cta-button-filled {
-    @apply px-6 py-3 rounded-lg font-mono text-sm font-medium transition-all duration-300 border-2;
-    background: hsl(var(--primary));
-    border-color: hsl(var(--primary));
+    @apply px-6 py-3 rounded-full font-mono text-sm font-semibold transition-all duration-300;
+    background: hsl(var(--gold));
     color: hsl(var(--primary-foreground));
-    box-shadow: 0 4px 15px rgba(255,255,255,0.1);
   }
 
   .cta-button-filled:hover {
-    box-shadow: 0 8px 25px rgba(255,255,255,0.15);
-    transform: translateY(-3px);
-    background: hsl(var(--secondary));
+    background: hsl(var(--gold) / 0.85);
+    transform: translateY(-2px);
   }
 }
 
