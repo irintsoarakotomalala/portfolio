@@ -58,11 +58,9 @@ import b2b5 from "../assets/B2B/5.png";
 import b2b6 from "../assets/B2B/6.png";
 import b2b7 from "../assets/B2B/7.png";
 
-const COLOR = "#FFFFFF";
-const DISC_R = 110;
-const DISC_SIZE = DISC_R * 2 + 120;
-const DISC_R_MOBILE = 75;
-const DISC_SIZE_MOBILE = DISC_R_MOBILE * 2 + 90;
+const COLOR = "#C4A050";
+const BG = "#13110d";
+const CARD_BG = "#1a1710";
 
 const allProjects = [
 	{
@@ -126,6 +124,11 @@ const allProjects = [
 		github: null, live: null, liveLabel: null, year: "2024",
 	},
 ];
+
+const DISC_R = 110;
+const DISC_SIZE = DISC_R * 2 + 120;
+const DISC_R_MOBILE = 75;
+const DISC_SIZE_MOBILE = DISC_R_MOBILE * 2 + 90;
 
 const N = allProjects.length;
 
@@ -264,8 +267,8 @@ const Projects = () => {
 	return (
 		<section
 			id="projects"
-			className="section-padding bg-[#0d0d18] overflow-visible"
-			style={{ paddingBottom: `calc(1rem + ${discSize / 2}px)` }}
+			className="section-padding overflow-visible"
+			style={{ background: BG, paddingTop: "7rem", paddingBottom: `calc(1rem + ${discSize / 2}px)` }}
 		>
 			<div className="max-w-7xl mx-auto w-full">
 				<motion.div
@@ -275,11 +278,16 @@ const Projects = () => {
 					transition={{ duration: 0.6 }}
 					className="mb-10"
 				>
-					<p className="section-subtitle">03. Projets</p>
-					<h2 className="section-title">Ce que j'ai construit</h2>
+					<p className="text-xs font-mono tracking-widest uppercase mb-3" style={{ color: COLOR }}>03. Projets</p>
+					<h2
+						className="font-black uppercase leading-none"
+						style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: "clamp(48px, 7vw, 96px)", color: "hsl(40 20% 92%)" }}
+					>
+						Ce que j'ai construit
+					</h2>
 				</motion.div>
 
-				{/* Compteur + barre de progression */}
+				{/* Compteur + dots */}
 				<div className="flex items-end justify-between mb-4 gap-4">
 					<AnimatePresence mode="wait">
 						<motion.div
@@ -290,18 +298,11 @@ const Projects = () => {
 							transition={{ duration: 0.3 }}
 							className="flex items-baseline gap-2 md:gap-3"
 						>
-							<span
-								className="text-3xl md:text-5xl font-bold font-mono leading-none"
-								style={{ color: COLOR }}
-							>
+							<span className="text-3xl md:text-5xl font-bold font-mono leading-none" style={{ color: COLOR }}>
 								{String(activeIndex + 1).padStart(2, "0")}
 							</span>
-							<span className="text-base md:text-lg font-mono text-white/25">
-								/ {String(N).padStart(2, "0")}
-							</span>
-							<span className="text-xs md:text-sm font-mono text-white/40 ml-1 tracking-widest">
-								{project.shortTitle}
-							</span>
+							<span className="text-base md:text-lg font-mono" style={{ color: `${COLOR}40` }}>/ {String(N).padStart(2, "0")}</span>
+							<span className="text-xs md:text-sm font-mono ml-1 tracking-widest" style={{ color: `${COLOR}60` }}>{project.shortTitle}</span>
 						</motion.div>
 					</AnimatePresence>
 					<div className="flex items-center gap-1.5 mb-1">
@@ -310,46 +311,33 @@ const Projects = () => {
 								key={i}
 								onClick={() => goTo(i)}
 								className="rounded-full transition-all duration-300"
-								style={{
-									height: 4,
-									width: i === activeIndex ? 28 : 8,
-									background: i === activeIndex ? COLOR : `${COLOR}30`,
-								}}
+								style={{ height: 4, width: i === activeIndex ? 28 : 8, background: i === activeIndex ? COLOR : `${COLOR}30` }}
 							/>
 						))}
 					</div>
 				</div>
 
-				{/* Layout mobile : boutons AU-DESSUS/EN-DESSOUS, layout desktop : boutons sur les côtés */}
+				{/* Layout */}
 				<div className={`flex items-center gap-3 w-full ${isMobile ? "flex-col" : "flex-row justify-center"}`}>
-					{/* Boutons mobile : rangée horizontale au-dessus */}
 					{isMobile && (
 						<div className="flex w-full justify-between px-2">
-							<button
-								onClick={prev}
-								className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/20 bg-white/5 text-white/60 hover:bg-white hover:text-black transition-all text-sm font-mono"
-							>
+							<button onClick={prev} className="flex items-center gap-2 px-4 py-2 rounded-full border text-sm font-mono transition-all hover:scale-105"
+								style={{ borderColor: `${COLOR}40`, color: `${COLOR}90`, background: `${COLOR}10` }}>
 								<ChevronLeft size={16} /> Préc.
 							</button>
-							<button
-								onClick={next}
-								className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/20 bg-white/5 text-white/60 hover:bg-white hover:text-black transition-all text-sm font-mono"
-							>
+							<button onClick={next} className="flex items-center gap-2 px-4 py-2 rounded-full border text-sm font-mono transition-all hover:scale-105"
+								style={{ borderColor: `${COLOR}40`, color: `${COLOR}90`, background: `${COLOR}10` }}>
 								Suiv. <ChevronRight size={16} />
 							</button>
 						</div>
 					)}
-
-					{/* Bouton précédent desktop */}
 					{!isMobile && (
-						<button
-							onClick={prev}
-							className="flex flex-shrink-0 flex-col items-center gap-1 group"
-						>
-							<div className="w-11 h-11 rounded-full border border-white/20 bg-white/5 flex items-center justify-center text-white/60 group-hover:bg-white group-hover:text-black transition-all group-hover:scale-110">
+						<button onClick={prev} className="flex flex-shrink-0 flex-col items-center gap-1 group">
+							<div className="w-11 h-11 rounded-full border flex items-center justify-center transition-all group-hover:scale-110"
+								style={{ borderColor: `${COLOR}40`, color: `${COLOR}80`, background: `${COLOR}10` }}>
 								<ChevronLeft size={20} />
 							</div>
-							<span className="text-[10px] font-mono text-white/30 group-hover:text-white/60 transition-colors">
+							<span className="text-[10px] font-mono transition-colors" style={{ color: `${COLOR}50` }}>
 								{String(((activeIndex - 1 + N) % N) + 1).padStart(2, "0")}
 							</span>
 						</button>
@@ -358,21 +346,14 @@ const Projects = () => {
 					{/* Carte principale */}
 					<div
 						ref={cardRef}
-						className="relative rounded-2xl md:rounded-3xl overflow-hidden cursor-pointer bg-black"
-						style={
-							isMobile
-								? {
-										width: "min(calc(100vw - 48px), 400px)",
-										height: "clamp(500px, 160vw, 720px)",
-										flexShrink: 0,
-										alignSelf: "center",
-									}
-								: {
-										height: "clamp(420px, 75vh, 700px)",
-										width: "clamp(420px, 80vw, 950px)",
-										flexShrink: 0,
-									}
-						}
+						className="relative rounded-2xl md:rounded-3xl overflow-hidden cursor-pointer border"
+						style={{
+							...(isMobile
+								? { width: "min(calc(100vw - 48px), 400px)", height: "clamp(500px, 160vw, 720px)", flexShrink: 0, alignSelf: "center" }
+								: { height: "clamp(420px, 75vh, 700px)", width: "clamp(420px, 80vw, 950px)", flexShrink: 0 }),
+							background: CARD_BG,
+							borderColor: `${COLOR}20`,
+						}}
 						onTouchStart={(e) => { touchStartX.current = e.touches[0].clientX; }}
 						onTouchEnd={(e) => { const dx = e.changedTouches[0].clientX - touchStartX.current; if (dx < -50) next(); else if (dx > 50) prev(); }}
 					>
@@ -433,11 +414,11 @@ const Projects = () => {
 							</motion.div>
 						</AnimatePresence>
 
-						{/* Overlay hover (desktop) */}
+						{/* Overlay hover */}
 						<motion.div
 							className="absolute inset-0 z-40 flex flex-col items-center justify-center px-6 md:px-10 text-center"
 							style={{
-								background: "rgba(8,12,24,0.78)",
+								background: `rgba(19,17,13,0.88)`,
 								backdropFilter: "blur(2px)",
 								WebkitBackdropFilter: "blur(2px)",
 								pointerEvents: hovered ? "auto" : "none",
@@ -453,60 +434,39 @@ const Projects = () => {
 								animate={{ y: hovered ? 0 : 20, opacity: hovered ? 1 : 0 }}
 								transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1], delay: 0.04 }}
 							>
-								<h3 className="text-2xl md:text-3xl font-bold text-white leading-tight">
+								<h3 className="text-2xl md:text-3xl font-black uppercase leading-tight" style={{ fontFamily: "'Barlow Condensed', sans-serif", color: "hsl(40 20% 92%)" }}>
 									{project.title}
 								</h3>
-								<p className="text-xs md:text-sm text-white/70 leading-relaxed">
+								<p className="text-xs md:text-sm leading-relaxed" style={{ color: "hsl(40 10% 60%)" }}>
 									{project.description}
 								</p>
 								<div className="flex items-center justify-center gap-2 flex-wrap mt-1">
 									{project.live && (
-										<a
-											href={project.live}
-											target="_blank"
-											rel="noopener noreferrer"
+										<a href={project.live} target="_blank" rel="noopener noreferrer"
 											className="group flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold transition-all hover:scale-105"
-											style={{ background: COLOR, color: "#080c18" }}
-										>
-											<ArrowUpRight
-												size={13}
-												className="group-hover:rotate-45 transition-transform"
-											/>
+											style={{ background: COLOR, color: "#0e0c08" }}>
+											<ArrowUpRight size={13} className="group-hover:rotate-45 transition-transform" />
 											{project.liveLabel ?? "Voir le site"}
 										</a>
 									)}
 									{project.github && (
-										<a
-											href={project.github}
-											target="_blank"
-											rel="noopener noreferrer"
-											className="flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold border border-white/20 text-white/70 hover:border-white/50 hover:text-white transition-all"
-										>
+										<a href={project.github} target="_blank" rel="noopener noreferrer"
+											className="flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold border transition-all hover:scale-105"
+											style={{ borderColor: `${COLOR}50`, color: COLOR, background: `${COLOR}10` }}>
 											<Github size={13} /> GitHub
 										</a>
 									)}
 									{!project.live && !project.github && (
-										<span className="flex items-center gap-2 px-4 py-2 rounded-full text-xs font-mono border border-white/10 text-white/30">
+										<span className="flex items-center gap-2 px-4 py-2 rounded-full text-xs font-mono border" style={{ borderColor: `${COLOR}20`, color: `${COLOR}50` }}>
 											Application mobile — non disponible publiquement
 										</span>
 									)}
 									{project.images.length > 1 && (
 										<button
-											onClick={() => {
-												setGalleryProject(project);
-												setGalleryIndex(0);
-											}}
+											onClick={() => { setGalleryProject(project); setGalleryIndex(0); }}
 											className="group flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold border transition-all hover:scale-105"
-											style={{
-												background: `${COLOR}18`,
-												borderColor: `${COLOR}90`,
-												color: COLOR,
-											}}
-										>
-											<Images
-												size={13}
-												className="group-hover:scale-110 transition-transform"
-											/>
+											style={{ background: `${COLOR}15`, borderColor: `${COLOR}60`, color: COLOR }}>
+											<Images size={13} className="group-hover:scale-110 transition-transform" />
 											{project.images.length} captures
 										</button>
 									)}
@@ -514,78 +474,42 @@ const Projects = () => {
 							</motion.div>
 						</motion.div>
 
-						{/* Titre discret (quand pas hover) */}
+						{/* Titre discret */}
 						<motion.div
 							className="absolute bottom-6 left-0 right-0 z-40 flex items-center justify-center pointer-events-none"
 							animate={{ opacity: hovered ? 0 : 1, y: hovered ? 6 : 0 }}
 							transition={{ duration: 0.25 }}
 						>
-							<h3 className="text-base md:text-xl font-bold text-white/80 leading-tight drop-shadow-lg px-4 text-center">
+							<h3 className="text-base md:text-xl font-black uppercase leading-tight drop-shadow-lg px-4 text-center"
+								style={{ fontFamily: "'Barlow Condensed', sans-serif", color: "hsl(40 20% 88%)" }}>
 								{project.title}
 							</h3>
 						</motion.div>
 
 						{/* Barre de progression bas */}
-						<div className="absolute bottom-0 left-0 right-0 h-0.5 bg-white/5 z-20">
-							<motion.div
-								className="h-full"
-								style={{ background: COLOR }}
+						<div className="absolute bottom-0 left-0 right-0 h-0.5 z-20" style={{ background: `${COLOR}15` }}>
+							<motion.div className="h-full" style={{ background: COLOR }}
 								animate={{ width: `${((activeIndex + 1) / N) * 100}%` }}
-								transition={{ duration: 0.5 }}
-							/>
+								transition={{ duration: 0.5 }} />
 						</div>
 
 						{/* Disque */}
 						<div
 							className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 z-50"
 							style={{ width: discSize, height: discSize }}
-							onMouseEnter={(e) => {
-								e.stopPropagation();
-								setHovered(false);
-							}}
-							onMouseLeave={(e) => {
-								e.stopPropagation();
-							}}
+							onMouseEnter={(e) => { e.stopPropagation(); setHovered(false); }}
+							onMouseLeave={(e) => { e.stopPropagation(); }}
 						>
-							<div
-								className="absolute inset-4 rounded-full"
-								style={{
-									background: "rgba(8,12,24,0.75)",
-									backdropFilter: "blur(20px)",
-									WebkitBackdropFilter: "blur(20px)",
-									boxShadow: `0 0 40px rgba(8,12,24,0.8), inset 0 0 30px rgba(8,12,24,0.5)`,
-								}}
-							/>
-							<div
-								className="absolute inset-0 rounded-full border"
-								style={{
-									borderColor: `${COLOR}70`,
-									boxShadow: `0 0 15px ${COLOR}25, inset 0 0 15px ${COLOR}10`,
-								}}
-							/>
-							<div
-								className="absolute rounded-full border"
-								style={{
-									inset: isMobile ? 8 : 14,
-									borderColor: `${COLOR}35`,
-								}}
-							/>
-							<motion.div
-								className="absolute rounded-full border"
-								style={{
-									inset: isMobile ? 16 : 28,
-									borderColor: `${COLOR}55`,
-								}}
-								animate={{
-									opacity: [0.4, 1, 0.4],
-									scale: [0.98, 1.01, 0.98],
-								}}
-								transition={{
-									duration: 2.5,
-									repeat: Infinity,
-									ease: "easeInOut",
-								}}
-							/>
+							<div className="absolute inset-4 rounded-full"
+								style={{ background: `rgba(19,17,13,0.85)`, backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)", boxShadow: `0 0 40px rgba(19,17,13,0.9), inset 0 0 30px rgba(19,17,13,0.5)` }} />
+							<div className="absolute inset-0 rounded-full border"
+								style={{ borderColor: `${COLOR}60`, boxShadow: `0 0 15px ${COLOR}20, inset 0 0 15px ${COLOR}08` }} />
+							<div className="absolute rounded-full border"
+								style={{ inset: isMobile ? 8 : 14, borderColor: `${COLOR}30` }} />
+							<motion.div className="absolute rounded-full border"
+								style={{ inset: isMobile ? 16 : 28, borderColor: `${COLOR}45` }}
+								animate={{ opacity: [0.4, 1, 0.4], scale: [0.98, 1.01, 0.98] }}
+								transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }} />
 							<motion.div
 								className="absolute inset-0"
 								animate={{ rotate: rotation }}
@@ -653,51 +577,22 @@ const Projects = () => {
 							{/* Centre pulsant */}
 							<div className="absolute inset-0 flex items-center justify-center pointer-events-none">
 								<div className="relative flex items-center justify-center">
-									<motion.div
-										className="absolute rounded-full"
-										style={{
-											width: isMobile ? 24 : 36,
-											height: isMobile ? 24 : 36,
-											background: `${COLOR}12`,
-											border: `1px solid ${COLOR}30`,
-										}}
+									<motion.div className="absolute rounded-full"
+										style={{ width: isMobile ? 24 : 36, height: isMobile ? 24 : 36, background: `${COLOR}12`, border: `1px solid ${COLOR}30` }}
 										animate={{ scale: [1, 1.4, 1], opacity: [0.5, 0.15, 0.5] }}
-										transition={{ duration: 2, repeat: Infinity, ease: "easeOut" }}
-									/>
+										transition={{ duration: 2, repeat: Infinity, ease: "easeOut" }} />
 									<motion.div
 										animate={{ scale: [1, 1.3, 1], opacity: [0.7, 1, 0.7] }}
 										transition={{ duration: 2, repeat: Infinity }}
 										className="rounded-full z-10"
-										style={{
-											width: 6,
-											height: 6,
-											background: COLOR,
-											boxShadow: `0 0 12px ${COLOR}`,
-										}}
-									/>
+										style={{ width: 6, height: 6, background: COLOR, boxShadow: `0 0 12px ${COLOR}` }} />
 								</div>
 							</div>
-							{/* Label tap (desktop uniquement) */}
 							{!isMobile && (
-								<motion.div
-									className="absolute left-1/2 -translate-x-1/2 pointer-events-none"
-									style={{ bottom: "14%" }}
-									animate={{
-										opacity: [0.4, 0.9, 0.4],
-										y: [0, -2, 0],
-									}}
-									transition={{
-										duration: 2.5,
-										repeat: Infinity,
-										ease: "easeInOut",
-									}}
-								>
-									<span
-										className="text-[9px] font-mono tracking-widest uppercase"
-										style={{ color: COLOR }}
-									>
-										◈ tap
-									</span>
+								<motion.div className="absolute left-1/2 -translate-x-1/2 pointer-events-none" style={{ bottom: "14%" }}
+									animate={{ opacity: [0.4, 0.9, 0.4], y: [0, -2, 0] }}
+									transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}>
+									<span className="text-[9px] font-mono tracking-widest uppercase" style={{ color: COLOR }}>◈ tap</span>
 								</motion.div>
 							)}
 						</div>
@@ -705,32 +600,29 @@ const Projects = () => {
 
 					{/* Bouton suivant desktop */}
 					{!isMobile && (
-						<button
-							onClick={next}
-							className="flex flex-shrink-0 flex-col items-center gap-1 group"
-						>
-							<div className="w-12 h-12 rounded-full border border-white/20 bg-white/5 flex items-center justify-center text-white/60 group-hover:bg-white group-hover:text-black transition-all duration-300 group-hover:scale-110 backdrop-blur-sm">
+						<button onClick={next} className="flex flex-shrink-0 flex-col items-center gap-1 group">
+							<div className="w-12 h-12 rounded-full border flex items-center justify-center transition-all duration-300 group-hover:scale-110 backdrop-blur-sm"
+								style={{ borderColor: `${COLOR}40`, color: `${COLOR}80`, background: `${COLOR}10` }}>
 								<ChevronRight size={22} strokeWidth={2.5} />
 							</div>
-							<span className="text-[10px] font-mono text-white/30 group-hover:text-white/60 transition-colors">
+							<span className="text-[10px] font-mono transition-colors" style={{ color: `${COLOR}50` }}>
 								{String(((activeIndex + 1) % N) + 1).padStart(2, "0")}
 							</span>
 						</button>
 					)}
 				</div>
 
-				{/* Hint clavier — desktop seulement */}
+				{/* Hints */}
 				{!isMobile && (
 					<div className="flex justify-center items-center gap-3 mt-6 pb-2">
-						<kbd className="px-2.5 py-1 text-xs font-mono rounded-lg border border-white/20 bg-white/5 text-white/60 font-bold">←</kbd>
-						<kbd className="px-2.5 py-1 text-xs font-mono rounded-lg border border-white/20 bg-white/5 text-white/60 font-bold">→</kbd>
-						<span className="text-xs font-mono text-white/30">clavier · glisser · cliquer</span>
+						<kbd className="px-2.5 py-1 text-xs font-mono rounded-lg border font-bold" style={{ borderColor: `${COLOR}30`, color: `${COLOR}70`, background: `${COLOR}08` }}>←</kbd>
+						<kbd className="px-2.5 py-1 text-xs font-mono rounded-lg border font-bold" style={{ borderColor: `${COLOR}30`, color: `${COLOR}70`, background: `${COLOR}08` }}>→</kbd>
+						<span className="text-xs font-mono" style={{ color: `${COLOR}40` }}>clavier · glisser · cliquer</span>
 					</div>
 				)}
-				{/* Hint swipe — mobile seulement */}
 				{isMobile && (
 					<div className="flex justify-center mt-4">
-						<span className="text-xs font-mono text-white/30">← glisser →</span>
+						<span className="text-xs font-mono" style={{ color: `${COLOR}40` }}>← glisser →</span>
 					</div>
 				)}
 			</div>
