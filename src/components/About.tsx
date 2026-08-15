@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { User, Heart, Globe } from "lucide-react";
 import RevealOnScroll from "./bits/RevealOnScroll";
-import CountUp from "./bits/CountUp";
 
 const GOLD = "#C4A050";
 const BG = "#13110d";
@@ -24,31 +23,6 @@ const About = () => {
           >
             Qui suis-je ?
           </h2>
-        </RevealOnScroll>
-
-        {/* Stats */}
-        <RevealOnScroll className="grid grid-cols-3 gap-4 mb-12">
-          {[
-            { value: 2, suffix: "+", label: "ans d'expérience" },
-            { value: 6, suffix: "+", label: "projets livrés" },
-            { value: 4, suffix: "", label: "technologies" },
-          ].map((stat, i) => (
-            <div
-              key={i}
-              className="text-center p-5 rounded-2xl border"
-              style={{ borderColor: `${GOLD}20`, background: "#1a1710" }}
-            >
-              <div
-                className="text-4xl font-black"
-                style={{ color: GOLD, fontFamily: "'Barlow Condensed', sans-serif" }}
-              >
-                <CountUp to={stat.value} suffix={stat.suffix} duration={2} />
-              </div>
-              <div className="text-xs font-mono uppercase tracking-widest mt-1" style={{ color: "hsl(40 10% 45%)" }}>
-                {stat.label}
-              </div>
-            </div>
-          ))}
         </RevealOnScroll>
 
         <div className="grid md:grid-cols-12 gap-4">
