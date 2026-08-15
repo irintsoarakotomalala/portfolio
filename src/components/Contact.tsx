@@ -3,8 +3,9 @@ import { motion } from "framer-motion";
 import { Send, Mail, MapPin, Github, Linkedin } from "lucide-react";
 import { toast } from "sonner";
 import emailjs from '@emailjs/browser';
-import MagneticButton from "./bits/MagneticButton";
 import RevealOnScroll from "./bits/RevealOnScroll";
+
+const GOLD = "#C4A050";
 
 const Contact = () => {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
@@ -16,96 +17,87 @@ const Contact = () => {
       toast.error("Veuillez remplir tous les champs.");
       return;
     }
-    
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(form.email)) {
       toast.error("Veuillez entrer une adresse email valide.");
       return;
     }
-    
     setSending(true);
-    
     try {
-      // Configuration EmailJS
       await emailjs.send(
-        'service_cohsebj',      // Service ID
-        'template_evq67sr',     // Template ID
-        {
-          from_name: form.name,
-          from_email: form.email,
-          message: form.message,
-        },
-        '5GuFuiFaocGehr_ZA'     // Public Key
+        'service_cohsebj',
+        'template_evq67sr',
+        { from_name: form.name, from_email: form.email, message: form.message },
+        '5GuFuiFaocGehr_ZA'
       );
-      
       toast.success("Message envoyé avec succès !");
       setForm({ name: "", email: "", message: "" });
     } catch (error) {
-      console.error('Erreur:', error);
       toast.error("Erreur lors de l'envoi. Réessayez.");
     } finally {
       setSending(false);
     }
   };
 
+  const inputClass = "w-full rounded-xl border px-4 py-3 text-sm font-mono transition-all outline-none focus:border-[#C4A050]/60";
+  const inputStyle = {
+    borderColor: `${GOLD}20`,
+    background: "#1a1710",
+    color: "hsl(40 15% 85%)",
+  };
+
   return (
-    <section id="contact" className="section-padding bg-[#0d0d18]">
+    <section id="contact" className="section-padding" style={{ background: "#16140f" }}>
       <div className="max-w-4xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12"
-        >
-          <p className="section-subtitle">05. Contact</p>
-          <h2 className="section-title">Travaillons ensemble</h2>
-          <p className="text-foreground mt-4 max-w-md mx-auto">
-            Vous avez un projet en tête ou souhaitez simplement discuter ?
-            N'hésitez pas à me contacter.
+        <RevealOnScroll className="mb-12">
+          <p className="text-xs font-mono tracking-widest uppercase mb-3" style={{ color: GOLD }}>
+            05. Contact
           </p>
-        </motion.div>
+          <h2
+            className="font-black uppercase leading-none"
+            style={{
+              fontFamily: "'Barlow Condensed', sans-serif",
+              fontSize: "clamp(48px, 7vw, 96px)",
+              color: "hsl(40 20% 92%)",
+            }}
+          >
+            Travaillons
+            <br />
+            ensemble
+          </h2>
+        </RevealOnScroll>
 
         <div className="grid md:grid-cols-2 gap-10">
-          {/* Form */}
           <motion.form
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true }}
             transition={{ duration: 0.6 }}
             onSubmit={handleSubmit}
-            className="space-y-4 sm:space-y-5"
+            className="space-y-4"
           >
+            {[
+              { id: "name", label: "Nom", type: "text", placeholder: "Votre nom", maxLength: 100 },
+              { id: "email", label: "Email", type: "email", placeholder: "votre@email.com", maxLength: 255 },
+            ].map((field) => (
+              <div key={field.id}>
+                <label htmlFor={field.id} className="text-xs font-mono uppercase tracking-widest block mb-2" style={{ color: "hsl(40 10% 50%)" }}>
+                  {field.label}
+                </label>
+                <input
+                  id={field.id}
+                  type={field.type}
+                  maxLength={field.maxLength}
+                  value={form[field.id as "name" | "email"]}
+                  onChange={(e) => setForm({ ...form, [field.id]: e.target.value })}
+                  className={inputClass}
+                  style={inputStyle}
+                  placeholder={field.placeholder}
+                />
+              </div>
+            ))}
             <div>
-              <label htmlFor="name" className="text-sm font-mono text-foreground block mb-1">
-                Nom
-              </label>
-              <input
-                id="name"
-                type="text"
-                maxLength={100}
-                value={form.name}
-                onChange={(e) => setForm({ ...form, name: e.target.value })}
-                className="w-full bg-muted border border-border rounded px-3 py-2 sm:px-4 sm:py-3 text-sm text-highlight focus:border-primary focus:outline-none transition-colors"
-                placeholder="Votre nom"
-              />
-            </div>
-            <div>
-              <label htmlFor="email" className="text-sm font-mono text-foreground block mb-1">
-                Email
-              </label>
-              <input
-                id="email"
-                type="email"
-                maxLength={255}
-                value={form.email}
-                onChange={(e) => setForm({ ...form, email: e.target.value })}
-                className="w-full bg-muted border border-border rounded px-3 py-2 sm:px-4 sm:py-3 text-sm text-highlight focus:border-primary focus:outline-none transition-colors"
-                placeholder="votre@email.com"
-              />
-            </div>
-            <div>
-              <label htmlFor="message" className="text-sm font-mono text-foreground block mb-1">
+              <label htmlFor="message" className="text-xs font-mono uppercase tracking-widest block mb-2" style={{ color: "hsl(40 10% 50%)" }}>
                 Message
               </label>
               <textarea
@@ -114,51 +106,48 @@ const Contact = () => {
                 maxLength={1000}
                 value={form.message}
                 onChange={(e) => setForm({ ...form, message: e.target.value })}
-                className="w-full bg-muted border border-border rounded px-3 py-2 sm:px-4 sm:py-3 text-sm text-highlight focus:border-primary focus:outline-none transition-colors resize-none"
+                className={inputClass + " resize-none"}
+                style={inputStyle}
                 placeholder="Décrivez votre projet..."
               />
             </div>
-            <MagneticButton>
-              <button
-                type="submit"
-                disabled={sending}
-                className="cta-button-filled w-full sm:w-auto flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                <Send size={16} />
-                {sending ? "Envoi en cours..." : "Envoyer"}
-              </button>
-            </MagneticButton>
+            <button
+              type="submit"
+              disabled={sending}
+              className="flex items-center gap-2 px-7 py-3.5 rounded-full font-bold text-sm tracking-wide transition-all hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+              style={{ background: GOLD, color: "#16140f" }}
+            >
+              <Send size={15} />
+              {sending ? "Envoi en cours..." : "Envoyer le message"}
+            </button>
           </motion.form>
 
-          {/* Info */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="space-y-8 flex flex-col justify-center"
+            className="flex flex-col justify-center space-y-6"
           >
-            <div className="flex items-center gap-4">
-              <div className="w-10 h-10 rounded-lg bg-white/8 flex items-center justify-center">
-                <Mail size={18} className="text-white/60" />
+            {[
+              { icon: Mail, label: "Email", value: "rakotomalalairintsoa285@gmail.com" },
+              { icon: MapPin, label: "Localisation", value: "Madagascar" },
+            ].map(({ icon: Icon, label, value }) => (
+              <div key={label} className="flex items-center gap-4">
+                <div
+                  className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+                  style={{ background: `${GOLD}12` }}
+                >
+                  <Icon size={16} style={{ color: GOLD }} />
+                </div>
+                <div>
+                  <p className="text-xs font-mono uppercase tracking-widest" style={{ color: "hsl(40 10% 45%)" }}>{label}</p>
+                  <p className="text-sm font-medium" style={{ color: "hsl(40 15% 80%)" }}>{value}</p>
+                </div>
               </div>
-              <div>
-                <p className="text-xs font-mono text-muted-foreground">Email</p>
-                <p className="text-sm text-highlight">rakotomalalairintsoa285@gmail.com</p>
-              </div>
-            </div>
+            ))}
 
-            <div className="flex items-center gap-4">
-              <div className="w-10 h-10 rounded-lg bg-white/8 flex items-center justify-center">
-                <MapPin size={18} className="text-white/60" />
-              </div>
-              <div>
-                <p className="text-xs font-mono text-muted-foreground">Localisation</p>
-                <p className="text-sm text-highlight">Madagascar</p>
-              </div>
-            </div>
-
-            <div className="flex gap-4 pt-4">
+            <div className="flex gap-3 pt-2">
               {[
                 { icon: Github, href: "https://github.com/irintsoarakotomalala", label: "GitHub" },
                 { icon: Linkedin, href: "https://www.linkedin.com/in/irintsoa-rakotomalala", label: "LinkedIn" },
@@ -169,9 +158,10 @@ const Contact = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="w-10 h-10 rounded-lg bg-white/8 flex items-center justify-center text-white/60 hover:bg-white/15 hover:text-white transition-colors"
+                  className="w-10 h-10 rounded-xl border flex items-center justify-center transition-all hover:border-[#C4A050]/50 hover:text-[#C4A050]"
+                  style={{ borderColor: `${GOLD}20`, color: "hsl(40 10% 50%)" }}
                 >
-                  <Icon size={18} />
+                  <Icon size={16} />
                 </a>
               ))}
             </div>
