@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import portrait from "../assets/portrait-Photoroom.png";
 
 const GOLD = "#C4A050";
 
@@ -44,7 +45,7 @@ const Navbar = () => {
         <a href="#hero" className="flex items-center gap-2.5 flex-shrink-0">
           <div className="w-9 h-9 rounded-xl overflow-hidden border" style={{ borderColor: `${GOLD}30` }}>
             <img
-              src="/portrait-Photoroom.png"
+              src={portrait}
               alt="Irintsoa"
               className="w-full h-full object-cover object-top"
               style={{ objectPosition: "50% 8%" }}

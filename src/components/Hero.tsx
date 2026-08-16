@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Github, Linkedin, Mail, ArrowRight } from "lucide-react";
+import portrait from "../assets/portrait-Photoroom.png";
 
 const GOLD = "#C4A050";
 const BG = "#0e0c08";
@@ -173,7 +174,7 @@ const Hero = () => {
           {/* Wrapper 160% de hauteur ancré en haut → overflow:hidden coupe les pieds */}
           <div className="absolute inset-x-0 top-0" style={{ height: "160%" }}>
             <motion.img
-              src="/portrait-Photoroom.png"
+              src={portrait}
               alt="Irintsoa RAKOTOMALALA"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -297,7 +298,7 @@ const Hero = () => {
           <div className="absolute pointer-events-none z-0" style={{ top: "15%", left: "45%", transform: "translateX(-50%)", width: 260, height: 340, background: `radial-gradient(ellipse at 50% 40%, ${GOLD}40 0%, ${GOLD}18 38%, transparent 68%)`, filter: "blur(45px)" }} />
           <div className="absolute inset-x-0" style={{ top: "6%", height: "130%" }}>
             <img
-              src="/portrait-Photoroom.png"
+              src={portrait}
               alt="Irintsoa"
               className="select-none"
               style={{ display: "block", height: "100%", width: "auto", maxWidth: "none", marginLeft: "-8%", marginRight: "auto", filter: `drop-shadow(0 20px 60px rgba(0,0,0,0.5))` }}
@@ -336,7 +337,7 @@ const Hero = () => {
               <div className="absolute inset-0 rounded-full" style={{ background: `radial-gradient(circle, ${GOLD}40 0%, transparent 70%)`, filter: "blur(14px)" }} />
               <div className="relative w-full h-full rounded-full overflow-hidden border-2" style={{ borderColor: `${GOLD}60` }}>
                 <img
-                  src="/portrait-Photoroom.png"
+                  src={portrait}
                   alt="Irintsoa"
                   className="select-none"
                   style={{ position: "absolute", top: "5%", left: "50%", transform: "translateX(-50%)", height: "150%", width: "auto", maxWidth: "none" }}
