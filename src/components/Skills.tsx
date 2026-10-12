@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { Code2, Palette, Database, Zap } from "lucide-react";
 import RevealOnScroll from "./bits/RevealOnScroll";
+import SectionHeading from "./bits/SectionHeading";
+import SpotlightCard from "./bits/SpotlightCard";
 
 const GOLD = "#C4A050";
 
@@ -35,88 +37,125 @@ const categories = [
   {
     title: "Frontend",
     icon: Code2,
+    blurb: "Interfaces rapides, accessibles et responsives.",
     skills: ["HTML/CSS", "JavaScript", "React", "Next.js", "TypeScript", "Tailwind CSS"],
   },
   {
     title: "Backend",
     icon: Database,
+    blurb: "APIs robustes et bases de données fiables.",
     skills: ["Node.js", "Express.js", "Java", "Springboot", "PostgreSQL", "API REST"],
   },
   {
     title: "Design & UI/UX",
     icon: Palette,
+    blurb: "De l'identité visuelle au prototype interactif.",
     skills: ["Figma", "Adobe XD", "Photoshop", "Illustrator", "Rebranding", "Prototypage"],
   },
   {
     title: "Outils & Méthodes",
     icon: Zap,
+    blurb: "Livrer proprement, en équipe et en continu.",
     skills: ["Git", "GitHub/GitLab", "Microservices", "Agile", "CI/CD", "Docker"],
   },
 ];
 
+const allSkills = categories.flatMap((c) => c.skills);
+const half = Math.ceil(allSkills.length / 2);
+const marqueeRows = [allSkills.slice(0, half), allSkills.slice(half)];
+
+const SkillPill = ({ skill }: { skill: string }) => (
+  <span
+    className="flex items-center gap-2 px-4 py-2 rounded-full border text-sm font-mono whitespace-nowrap"
+    style={{ borderColor: `${GOLD}20`, background: "#1a1710", color: "hsl(40 15% 75%)" }}
+  >
+    <span className="scale-125">{skillIcons[skill]}</span>
+    {skill}
+  </span>
+);
+
 const Skills = () => {
   return (
-    <section id="skills" className="section-padding" style={{ background: "#16140f" }}>
+    <section id="skills" className="section-padding relative overflow-hidden" style={{ background: "#16140f" }}>
       <div className="max-w-6xl mx-auto">
-        <RevealOnScroll className="mb-12">
-          <p className="text-xs font-mono tracking-widest uppercase mb-3" style={{ color: GOLD }}>
-            02. Compétences
-          </p>
-          <h2
-            className="font-black uppercase leading-none"
-            style={{
-              fontFamily: "'Barlow Condensed', sans-serif",
-              fontSize: "clamp(48px, 7vw, 96px)",
-              color: "hsl(40 20% 92%)",
-            }}
-          >
-            Ma stack
-          </h2>
-        </RevealOnScroll>
+        <SectionHeading
+          index="02"
+          eyebrow="Compétences"
+          title="Ma stack"
+          aside={`${allSkills.length} outils et technologies que j'utilise au quotidien, du design jusqu'au déploiement.`}
+        />
+      </div>
 
-        <div className="grid md:grid-cols-2 gap-5">
+      {/* Bandeau défilant */}
+      <div
+        className="marquee-group relative -mx-6 md:-mx-12 lg:-mx-24 xl:-mx-32 mb-14 flex flex-col gap-3"
+        style={{
+          maskImage: "linear-gradient(to right, transparent, black 12%, black 88%, transparent)",
+          WebkitMaskImage: "linear-gradient(to right, transparent, black 12%, black 88%, transparent)",
+        }}
+      >
+        {marqueeRows.map((row, ri) => (
+          <div key={ri} className="flex overflow-hidden">
+            {[0, 1].map((copy) => (
+              <div
+                key={copy}
+                aria-hidden={copy === 1}
+                className={`marquee-track flex shrink-0 gap-3 pr-3 ${ri === 1 ? "marquee-reverse" : ""}`}
+              >
+                {row.map((skill) => (
+                  <SkillPill key={skill} skill={skill} />
+                ))}
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+
+      <div className="max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-4 md:gap-5">
           {categories.map((cat, catIdx) => (
             <RevealOnScroll key={cat.title} delay={catIdx * 0.08}>
-              <div
-                className="p-6 rounded-2xl border transition-all duration-300 hover:border-[#C4A050]/30"
-                style={{ borderColor: `${GOLD}15`, background: "#1a1710" }}
-              >
-                <div className="flex items-center gap-3 mb-5">
-                  <div
-                    className="w-10 h-10 rounded-xl flex items-center justify-center"
-                    style={{ background: `${GOLD}12` }}
-                  >
-                    <cat.icon size={20} style={{ color: GOLD }} />
+              <SpotlightCard className="h-full p-6 md:p-7">
+                <div className="flex items-start justify-between gap-4 mb-6">
+                  <div className="flex items-center gap-3">
+                    <div
+                      className="w-11 h-11 rounded-xl flex items-center justify-center border transition-transform duration-500 group-hover/spot:rotate-[-8deg] group-hover/spot:scale-105"
+                      style={{ background: `${GOLD}12`, borderColor: `${GOLD}25` }}
+                    >
+                      <cat.icon size={20} style={{ color: GOLD }} />
+                    </div>
+                    <div>
+                      <h3 className="font-bold uppercase tracking-widest text-sm" style={{ color: "hsl(40 20% 88%)" }}>
+                        {cat.title}
+                      </h3>
+                      <p className="text-xs mt-0.5" style={{ color: "hsl(40 10% 50%)" }}>{cat.blurb}</p>
+                    </div>
                   </div>
-                  <h3
-                    className="font-bold uppercase tracking-widest text-sm"
-                    style={{ color: "hsl(40 20% 85%)" }}
+                  <span
+                    className="font-black leading-none select-none"
+                    style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: 40, color: "transparent", WebkitTextStroke: `1px ${GOLD}40` }}
                   >
-                    {cat.title}
-                  </h3>
+                    {String(catIdx + 1).padStart(2, "0")}
+                  </span>
                 </div>
-                <div className="flex flex-wrap gap-2">
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                   {cat.skills.map((skill, si) => (
-                    <motion.span
+                    <motion.div
                       key={skill}
-                      initial={{ opacity: 0, scale: 0.85 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
-                      transition={{ delay: catIdx * 0.08 + si * 0.04, type: "spring", stiffness: 200 }}
-                      whileHover={{ scale: 1.06, y: -2 }}
-                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-xs font-mono transition-colors cursor-default"
-                      style={{
-                        borderColor: `${GOLD}18`,
-                        background: `${GOLD}06`,
-                        color: "hsl(40 10% 65%)",
-                      }}
+                      transition={{ delay: catIdx * 0.06 + si * 0.04, duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                      whileHover={{ y: -3 }}
+                      className="flex items-center gap-2 px-3 py-2.5 rounded-xl border text-xs font-mono cursor-default transition-colors hover:border-[#C4A050]/45 hover:bg-[#C4A050]/[0.08] hover:text-[#e8d9b0]"
+                      style={{ borderColor: `${GOLD}15`, background: `${GOLD}05`, color: "hsl(40 10% 68%)" }}
                     >
                       {skillIcons[skill]}
-                      {skill}
-                    </motion.span>
+                      <span className="truncate">{skill}</span>
+                    </motion.div>
                   ))}
                 </div>
-              </div>
+              </SpotlightCard>
             </RevealOnScroll>
           ))}
         </div>
